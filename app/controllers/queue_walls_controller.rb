@@ -6,7 +6,9 @@ class QueueWallsController < ApplicationController
 
   def index
     @queues = QueueWall.all
-    travel_time(coords)
+    if cookies[:lat_lng].present?
+      travel_time(coords)
+    end
   end
 
   def new

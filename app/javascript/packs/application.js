@@ -20,7 +20,7 @@ ActiveStorage.start()
 
 // External imports
 import "bootstrap";
-import { getGeoLocation, setGeoCookie } from "components/currentcoords";
+//import { getGeoLocation, setGeoCookie } from "components/currentcoords";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -28,5 +28,4 @@ import { getGeoLocation, setGeoCookie } from "components/currentcoords";
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  getGeoLocation();
 });

@@ -11,3 +11,6 @@
     </div>
   <% end %>
 </div>
+<% unless @lat_lng %>
+  <%= javascript_include_tag "currentcoords.js" %>
+<% end %>
