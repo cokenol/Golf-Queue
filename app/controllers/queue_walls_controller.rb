@@ -7,9 +7,8 @@ class QueueWallsController < ApplicationController
   def index
     @queues = QueueWall.all
     @ranges = GolfRange.all
-    if cookies[:lat_lng].present?
-      @traffic = travel_time(coords, @ranges)
-    end
+    @weather = weather_status(@ranges)
+    return @traffic = travel_time(coords, @ranges) if cookies[:lat_lng].present?
   end
 
   def new
@@ -33,6 +32,17 @@ class QueueWallsController < ApplicationController
 
   def coords
     @lat_lng = cookies[:lat_lng].split("|")
+  end
+
+  def weather_status(ranges)
+    weather_array = []
+    ranges.each do |place|
+      url = "https://api.openweathermap.org/data/2.5/weather?lat=#{place.latitude}&lon=#{place.longitude}&appid=#{ENV['OPENWEATHER_API_KEY']}"
+      weather_json = URI.parse(url).open.read
+      weather_info = JSON.parse(weather_json)
+      weather_array << weather_info["weather"].first["icon"]
+    end
+    weather_array
   end
 
 end
