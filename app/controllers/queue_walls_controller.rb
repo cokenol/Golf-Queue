@@ -9,6 +9,7 @@ class QueueWallsController < ApplicationController
     if cookies[:lat_lng].present?
       travel_time(coords)
     end
+    @ranges = GolfRange.all
   end
 
   def new
