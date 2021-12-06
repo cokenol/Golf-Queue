@@ -5,8 +5,9 @@ class QueueWallsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    @ranges = GolfRange.all
+    @queues = QueueWall.all
     travel_time
+
   end
 
   def new
