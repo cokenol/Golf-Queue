@@ -1,2 +1,5 @@
 <h1>QueueWalls#index</h1>
-<p>Find me in app/views/queue_walls/index.html.erb</p>
+<% @ranges.each do |r|  %>
+  <h2><%= r.name %></h2>
+  <p><%= r.address %></p>
+<% end %>
