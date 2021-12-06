@@ -1,3 +1,4 @@
+
 navigator.geolocation.getCurrentPosition(setGeoCookie);
 
 
