@@ -1,6 +1,7 @@
 <div class="container">
   <% @ranges.each do |q|  %>
     <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= q.photo_url %>)">
+
       <div class="d-flex justify-content-between w-100">
         <div class="title">
           <h4><%= q.name %></h4>
@@ -11,7 +12,13 @@
       </div>
       <div class="d-flex justify-content-between w-100 align-items-end">
         <div class="traffic-status mb-0">
-          <h4><i class="fas fa-car"></i><%= ": #{rand(1..23)} mins" %></h4>
+
+        <% if @traffic.present? %>
+          <h4><i class="fas fa-car"></i><%= ": #{@traffic[index]} mins" %></h4>
+        <% else %>
+          <h4><i class="fas fa-car"></i><%= ": -" %></h4>
+        <% end %>
+
         </div>
 
         <div class="queue-status d-flex justify-content-between">

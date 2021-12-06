@@ -40,6 +40,11 @@ photos_url = { "Marina Bay" => "https://res.cloudinary.com/din6svi45/image/uploa
                     "Punggol Par Range" => "https://res.cloudinary.com/din6svi45/image/upload/v1638788181/production/Punggol.jpg",
                     "Mandai" => "https://res.cloudinary.com/din6svi45/image/upload/v1638787728/production/Mandai_qryana.jpg" }
 
+latlong = [[1.2934890689052803, 103.87154692615685],
+           [1.3457101683248145, 103.79643725499207],
+           [1.3657171405712318, 103.74844451081523],
+           [1.3957574633567735, 103.91756995499189],
+           [1.400995085937511, 103.80911723965048]]
 
 20.times do
   user = User.new(
@@ -54,6 +59,8 @@ name.each_with_index do |n, index|
   golf = GolfRange.new(
     name: n,
     address: address[index],
+    latitude: latlong[index][0],
+    longitude: latlong[index][1],
     photo_url: photos_url[n])
   puts "Creating #{golf.name}"
   golf.save!

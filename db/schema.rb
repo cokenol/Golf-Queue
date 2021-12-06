@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_12_06_105805) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +23,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_105805) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "photo_url"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "queue_walls", force: :cascade do |t|
