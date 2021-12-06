@@ -6,6 +6,7 @@ class QueueWallsController < ApplicationController
 
   def index
     @queues = QueueWall.all
+    @ranges = GolfRange.all
     travel_time
 
   end
