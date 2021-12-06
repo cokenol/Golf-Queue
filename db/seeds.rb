@@ -22,6 +22,12 @@ address = ["80 Rhu Cross, 01, Singapore 437437",
            "60 Punggol E, Singapore 828825",
            "Upper Seletar Reservoir, Mandai Rd Track 7, 779384"]
 
+latlong = [[1.2934890689052803, 103.87154692615685],
+           [1.3457101683248145, 103.79643725499207],
+           [1.3657171405712318, 103.74844451081523],
+           [1.3957574633567735, 103.91756995499189],
+           [1.400995085937511, 103.80911723965048]]
+
 levels = {"Marina Bay" => ['L1', 'L2', 'L3'],
           "Champions" => ['L1', 'L2'],
           "Bukit Batok" => ['L1', 'L2', 'L3'],
@@ -38,7 +44,10 @@ end
 
 name.each_with_index do |n, index|
   golf = GolfRange.new(name: n,
-                  address: address[index])
+                       address: address[index],
+                       latitude: latlong[index][0],
+                       longitude: latlong[index][1])
+
   puts "Creating #{golf.name}"
   golf.save!
   puts "Seeding golf-range data done. 👌"
