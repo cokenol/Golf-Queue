@@ -1,0 +1,2 @@
+class GolfRange < ApplicationRecord
+end
