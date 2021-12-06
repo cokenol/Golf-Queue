@@ -6,10 +6,10 @@ class QueueWallsController < ApplicationController
 
   def index
     @queues = QueueWall.all
-    if cookies[:lat_lng].present?
-      travel_time(coords)
-    end
     @ranges = GolfRange.all
+    if cookies[:lat_lng].present?
+      @traffic = travel_time(coords, @ranges)
+    end
   end
 
   def new
@@ -20,13 +20,15 @@ class QueueWallsController < ApplicationController
 
   private
 
-  def travel_time(coordinates)
-    url = "https://api.mapbox.com/directions/v5/mapbox/driving/#{coordinates[1]},#{coordinates[0]};103.8693475,1.2933014?access_token=#{ENV['MAPBOX_API_KEY']}"
-    mapbox_json = URI.parse(url).open.read
-    mapbox_info = JSON.parse(mapbox_json)
-
-    puts (mapbox_info["routes"].first["duration"] / 60).ceil
-    puts "mins"
+  def travel_time(coordinates, ranges)
+    time_array = []
+    ranges.each do |place|
+      url = "https://api.mapbox.com/directions/v5/mapbox/driving/#{coordinates[1]},#{coordinates[0]};#{place.longitude},#{place.latitude}?access_token=#{ENV['MAPBOX_API_KEY']}"
+      mapbox_json = URI.parse(url).open.read
+      mapbox_info = JSON.parse(mapbox_json)
+      time_array << (mapbox_info["routes"].first["duration"] / 60).ceil
+    end
+    time_array
   end
 
   def coords
