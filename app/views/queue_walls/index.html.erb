@@ -1,6 +1,6 @@
 <div class="container">
   <% @ranges.each do |q|  %>
-    <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+    <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= q.photo_url %>)">
       <div class="d-flex justify-content-between w-100">
         <div class="title">
           <h4><%= q.name %></h4>
