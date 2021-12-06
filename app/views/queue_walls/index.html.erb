@@ -1,2 +1,13 @@
-<h1>QueueWalls#index</h1>
-<p>Find me in app/views/queue_walls/index.html.erb</p>
+<div class="container">
+  <h1>QueueWalls#index</h1>
+  <% @queues.each do |q|  %>
+
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+      <div class="d-flex">
+        <h2><%= q.name %></h2>
+        <div class="queues">
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
