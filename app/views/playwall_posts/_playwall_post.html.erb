@@ -2,6 +2,10 @@
 
 <div class="container">
   <div class="card-trip">
+        <div class="card-trip-infos">
+          <h2>@<%= playwall_post.user.username %></h2>
+          <p class="text-muted"><%= playwall_post.golf_range.name %></p>
+        </div>
       <% if playwall_post.photos.attached? %>
         <% if playwall_post.photos.count > 1 %>
           <div id="<%= playwall_post.id %>photos" class="carousel slide" data-ride="carousel">
@@ -37,18 +41,38 @@
   <% end %>
 
 
+  <div class="card-trip-infos pt-2" data-controller="like-button">
+    <h2>
 
-  <div class="card-trip-infos">
-    <h2><%= playwall_post.caption %></h2>
-    <div class="votes d-flex">
-      <h2><i class="far fa-thumbs-up p-2"></i></h2>
-      <h2 class="align-self-center"></h2>
-      <h2><i class="far fa-thumbs-down p-2"></i></h2>
-    </div>
+    <% if playwall_post.favoritors.include?(current_user) %>
+
+    <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
+                             class: "fas fa-heart",
+                             style: "color:#bf0206;",
+                             remote: true,
+                             method: :post,
+                             data: {
+                             like_button_target: 'likebtn',
+                             action: 'click->like-button#like'
+                           } %>
+    <% else %>
+          <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
+                             class: "far fa-heart",
+                             style: "color:black;",
+                             remote: true,
+                             method: :post,
+                             data: {
+                             like_button_target: 'unlikebtn',
+                             action: 'click->like-button#unlike'
+                           } %>
+    <% end %>
+    <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
   </div>
-  <div class="card-trip-infos">
-    <h2>@<%= playwall_post.user.username %></h2>
-    <h2><%= playwall_post.golf_range.name %></h2>
+  <div class="card-trip-infos pt-3">
+    <p><%= playwall_post.caption %></p>
+  </div>
+  <div class="card-trip-infos pt-3">
+    <p class="text-muted">posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
   </div>
 </div>
 
