@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_105805) do
+ActiveRecord::Schema.define(version: 2021_12_07_024523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2021_12_06_105805) do
     t.float "latitude"
     t.float "longitude"
     t.string "photo_url"
+  end
+
+  create_table "playwall_posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "caption"
+    t.bigint "golf_range_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["golf_range_id"], name: "index_playwall_posts_on_golf_range_id"
+    t.index ["user_id"], name: "index_playwall_posts_on_user_id"
   end
 
   create_table "queue_walls", force: :cascade do |t|
@@ -49,6 +59,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_105805) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "playwall_posts", "golf_ranges"
+  add_foreign_key "playwall_posts", "users"
   add_foreign_key "queue_walls", "golf_ranges"
   add_foreign_key "queue_walls", "users"
 end
