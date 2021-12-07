@@ -23,7 +23,7 @@
           </div>
 
           <div class="queue-status d-flex justify-content-between">
-            <% @queues.by_range(q.id).each do |q| %>
+            <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
               <div class="level-queue d-flex flex-column px-3 align-items-center">
                 <small><%= "#{q.level}"%></small>
                 <small><%= "#{q.queue_length} pax"%></small>
