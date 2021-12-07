@@ -1,2 +1,18 @@
-<h1>Update queue</h1>
-<p>Find me in app/views/queue_walls/new.html.erb</p>
+<div class="container">
+  <% @queue.level = params[:level] %>
+  <h1 class="text-center">Update queue for <%= @golfrange.name %> @ <%= @queue.level  %></h1>
+  <div data-controller='queue-update'>
+    <%= simple_form_for [@golfrange, @queue] do |f|  %>
+      <%= f.input :level, as: :hidden  %>
+      <%= f.input :queue_length,
+                  as: :range,
+                  input_html: { 'data-queue-update-target': 'input',
+                                'data-action': 'change->queue-update#peopleSelected',
+                                default: 1, min: 1, max: 20
+                    } %>
+      <%= f.input :queue_length, input_html: { 'data-queue-update-target': 'output' }, label: false  %>
+      <%= f.input :photo, as: :file %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>

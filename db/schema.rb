@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_033945) do
-
+ActiveRecord::Schema.define(version: 2021_12_07_034313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,12 +87,6 @@ ActiveRecord::Schema.define(version: 2021_12_07_033945) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "playwall_posts", "golf_ranges"
-  add_foreign_key "playwall_posts", "users"
-
   create_table "votes", force: :cascade do |t|
     t.string "votable_type"
     t.bigint "votable_id"
@@ -110,7 +103,10 @@ ActiveRecord::Schema.define(version: 2021_12_07_033945) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
-
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "playwall_posts", "golf_ranges"
+  add_foreign_key "playwall_posts", "users"
   add_foreign_key "queue_walls", "golf_ranges"
   add_foreign_key "queue_walls", "users"
 end
