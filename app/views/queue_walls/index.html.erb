@@ -1,36 +1,38 @@
 <div class="container">
   <% @ranges.each_with_index do |q, index|  %>
-    <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= q.photo_url %>)">
+    <%= link_to golf_range_path(q) do   %>
+      <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= q.photo_url %>)">
 
-      <div class="d-flex justify-content-between w-100">
-        <div class="title">
-          <h4><%= q.name %></h4>
+        <div class="d-flex justify-content-between w-100">
+          <div class="title">
+            <h4><%= q.name %></h4>
+          </div>
+          <div class="weather-status">
+            <h4 class="px-3"><%= image_tag "http://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
+          </div>
         </div>
-        <div class="weather-status">
-          <h4 class="px-3"><%= image_tag "http://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
-        </div>
-      </div>
-      <div class="d-flex justify-content-between w-100 align-items-end">
-        <div class="traffic-status mb-0" data-controller="weather">
+        <div class="d-flex justify-content-between w-100 align-items-end">
+          <div class="traffic-status mb-0" data-controller="weather">
 
-        <% if @traffic.present? %>
-          <h4><i class="fas fa-car"></i><%= ": #{@traffic[index]} mins" %></h4>
-        <% else %>
-          <h4><i class="fas fa-car"></i><%= ": -" %></h4>
-        <% end %>
-
-        </div>
-
-        <div class="queue-status d-flex justify-content-between">
-          <% @queues.by_range(q.id).each do |q| %>
-            <div class="level-queue d-flex flex-column px-3 align-items-center">
-              <small><%= "#{q.level}"%></small>
-              <small><%= "#{q.queue_length} pax"%></small>
-            </div>
+          <% if @traffic.present? %>
+            <h4><i class="fas fa-car"></i><%= ": #{@traffic[index]} mins" %></h4>
+          <% else %>
+            <h4><i class="fas fa-car"></i><%= ": -" %></h4>
           <% end %>
+
+          </div>
+
+          <div class="queue-status d-flex justify-content-between">
+            <% @queues.by_range(q.id).each do |q| %>
+              <div class="level-queue d-flex flex-column px-3 align-items-center">
+                <small><%= "#{q.level}"%></small>
+                <small><%= "#{q.queue_length} pax"%></small>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 <!---
