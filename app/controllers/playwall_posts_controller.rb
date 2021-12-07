@@ -1,4 +1,6 @@
 class PlaywallPostsController < ApplicationController
+  before_action :authenticate_user!, only: :toggle_favorite
+
   def index
     @playwall = PlaywallPost.all
 
@@ -12,6 +14,11 @@ class PlaywallPostsController < ApplicationController
     @playwall = PlaywallPost.new(post_params)
     @playwall.user = current_user
     redirect_to playwall_posts_path if @playwall.save
+  end
+
+  def toggle_favorite
+    @playwall = PlaywallPost.find(params[:id])
+    current_user.favorited?(@playwall) ? current_user.unfavorite(@playwall) : current_user.favorite(@playwall)
   end
 
   private
