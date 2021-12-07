@@ -3,5 +3,6 @@
 <%= simple_form_for(@playwall) do |f| %>
     <%= f.input :caption, label: "What's on your mind?" %>
     <%= f.association :golf_range, label: "Location"  %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <%= f.submit "Create New Post" %>
 <% end %>

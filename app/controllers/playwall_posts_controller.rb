@@ -17,6 +17,6 @@ class PlaywallPostsController < ApplicationController
   private
 
   def post_params
-    params.require(:playwall_post).permit(:user_id, :caption, :golf_range_id)
+    params.require(:playwall_post).permit(:user_id, :caption, :golf_range_id, photos: [])
   end
 end
