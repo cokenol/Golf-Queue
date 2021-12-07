@@ -1,12 +1,64 @@
-<div class="card-trip">
+<div class="card-trip" data-controller="vote-button">
   <img src="https://source.unsplash.com/1920x1080/?golf" />
   <div class="card-trip-infos">
     <h2><%= queue_wall.level %>:</h2>
     <h2><%= queue_wall.queue_length %> pax in queue</h2>
     <div class="votes d-flex">
-      <h2><i class="far fa-thumbs-up p-2"></i></h2>
-      <h2 class="align-self-center"><%= queue_wall.votes_for.size %></h2>
-      <h2><i class="far fa-thumbs-down p-2"></i></h2>
+      <% if current_user.voted_up_on? queue_wall %>
+        <%# <h2><i class="fas fa-thumbs-up p-2"></i></h2> %>
+        <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
+                          class: "fas fa-thumbs-up p-2",
+                          style: "color:green;",
+                          remote: true,
+                          method: :post,
+                          data: {
+                          vote_button_target: 'filledLikeBtn'
+                          # action: 'click->vote-button#dislike'
+                        } %>
+      <% else %>
+        <%# <h2><i class="far fa-thumbs-up p-2"></i></h2> %>
+        <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
+                  class: "far fa-thumbs-up p-2",
+                  style: "color:black;",
+                  remote: true,
+                  method: :post,
+                  data: {
+                  vote_button_target: 'emptyLikeBtn',
+                  action: 'click->vote-button#like'
+                } %>
+      <% end %>
+      <h2 class="align-self-center" data-vote-button-target="upcounter" value="<%= queue_wall.get_likes.size %>"><%= queue_wall.get_likes.size %></h2>
+      <% if current_user.voted_down_on? queue_wall %>
+        <%# <h2><i class="fas fa-thumbs-up p-2"></i></h2> %>
+        <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
+                          class: "fas fa-thumbs-down p-2",
+                          style: "color:red;",
+                          remote: true,
+                          method: :post,
+                          data: {
+                          vote_button_target: 'filledDislikeBtn'
+                          # action: 'click->vote-button#dislike'
+                        } %>
+      <% else %>
+        <%# <h2><i class="far fa-thumbs-up p-2"></i></h2> %>
+        <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
+                  class: "far fa-thumbs-down p-2",
+                  style: "color:black;",
+                  remote: true,
+                  method: :post,
+                  data: {
+                  vote_button_target: 'emptyDislikeBtn',
+                  action: 'click->vote-button#dislike'
+                } %>
+      <% end %>
+      <%# <h2><i class="far fa-thumbs-down p-2"></i></h2> %>
+
+      <% if  queue_wall.get_dislikes.size == 0%>
+        <h2 class="align-self-center" data-vote-button-target="downcounter" value="<%= queue_wall.get_dislikes.size %>"><%= queue_wall.get_dislikes.size %></h2>
+      <% else %>
+        <h2 class="align-self-center" data-vote-button-target="downcounter" value="<%= queue_wall.get_dislikes.size %>">-<%= queue_wall.get_dislikes.size %></h2>
+      <% end %>
+
     </div>
   </div>
   <div class="card-trip-infos">
