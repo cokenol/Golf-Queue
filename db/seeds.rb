@@ -46,6 +46,7 @@ latlong = [[1.2934890689052803, 103.87154692615685],
            [1.3957574633567735, 103.91756995499189],
            [1.400995085937511, 103.80911723965048]]
 
+
 20.times do
   user = User.new(
     email: Faker::Internet.email,
@@ -74,8 +75,10 @@ name.each_with_index do |n, index|
       level: v,
       queue_length: rand(0..23))
     puts "Creating #{queue}"
+
     queue.save!
   end
+
 
 end
 

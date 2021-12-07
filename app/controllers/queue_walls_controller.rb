@@ -2,7 +2,7 @@ require 'json'
 require 'open-uri'
 
 class QueueWallsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: %i[index filter]
 
   def index
     @queues = QueueWall.all
@@ -15,6 +15,11 @@ class QueueWallsController < ApplicationController
   end
 
   def create
+  end
+
+  def filter
+    @queues = QueueWall.by_range(params[:id])
+    # raise
   end
 
   private
