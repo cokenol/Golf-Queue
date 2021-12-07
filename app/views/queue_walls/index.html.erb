@@ -1,6 +1,6 @@
 <div class="container">
   <% @ranges.each_with_index do |q, index|  %>
-    <%= link_to filter_path(q) do   %>
+    <%= link_to golf_range_path(q) do   %>
       <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= q.photo_url %>)">
 
         <div class="d-flex justify-content-between w-100">

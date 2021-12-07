@@ -12,14 +12,12 @@ class QueueWallsController < ApplicationController
   end
 
   def new
+    @queue = QueueWall.new
+    @queue.golf_range_id = params[:id]
+    raise
   end
 
   def create
-  end
-
-  def filter
-    @queues = QueueWall.by_range(params[:id])
-    # raise
   end
 
   private
