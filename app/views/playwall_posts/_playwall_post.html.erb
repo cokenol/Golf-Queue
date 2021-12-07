@@ -1,12 +1,10 @@
 
 
-<div>
-  <p>New Post</p>
-
-  <% if playwall_post.photos.attached? %>
+<div class="container">
+  <div class="card-trip">
+      <% if playwall_post.photos.attached? %>
         <% if playwall_post.photos.count > 1 %>
-        <
-          <div id="<%= playwall_post.id %>" class="carousel slide" data-ride="carousel">
+          <div id="<%= playwall_post.id %>photos" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
@@ -18,11 +16,11 @@
               <% end %>
             </div>
 
-            <button class="carousel-control-prev" type="button" data-target="#<%= playwall_post.id %>" data-slide="prev">
+            <button class="carousel-control-prev" type="button" data-target="#<%= playwall_post.id %>photos" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-target="#<%= playwall_post.id %>" data-slide="next">
+            <button class="carousel-control-next" type="button" data-target="#<%= playwall_post.id %>photos" data-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </button>
@@ -36,13 +34,22 @@
             </div>
           </div>
     <% end %>
-
-  <% else %>
-    <p>You got no photo</p>
   <% end %>
 
-  <p>location: <%= playwall_post.golf_range.name %> </p>
-  <p>posted by: <%= playwall_post.user.email %> </p>
-  <p>posted at: <%= playwall_post.created_at %> </p>
-  <%= playwall_post.caption %>
+
+
+  <div class="card-trip-infos">
+    <h2><%= playwall_post.caption %></h2>
+    <div class="votes d-flex">
+      <h2><i class="far fa-thumbs-up p-2"></i></h2>
+      <h2 class="align-self-center"></h2>
+      <h2><i class="far fa-thumbs-down p-2"></i></h2>
+    </div>
+  </div>
+  <div class="card-trip-infos">
+    <h2>@<%= playwall_post.user.username %></h2>
+    <h2><%= playwall_post.golf_range.name %></h2>
+  </div>
+</div>
+
 </div>
