@@ -9,6 +9,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  font-weight: bolder;
 
   a {
   float: left;
@@ -26,13 +27,17 @@
   }
 
   a.active {
-  background-color: #04AA6D;
-  color: white;
+  color: yellow;
   }
 
   i {
     font-size: 3rem;
     color: white;
   //   padding: 0.4rem 0 1rem;
+  }
+
+  #navbarSupportedContent .active {
+  color: yellow;
+  // background-color: #4f81bd;
   }
 }
