@@ -1,0 +1,38 @@
+/* Place the navbar at the bottom of the page, and make it stick */
+.btm-navbar {
+  background-color: #05386b;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  }
+
+  a:hover {
+  background-color: #ddd;
+  color: black;
+  }
+
+  a.active {
+  background-color: #04AA6D;
+  color: white;
+  }
+
+  i {
+    font-size: 3rem;
+    color: white;
+  //   padding: 0.4rem 0 1rem;
+  }
+}

@@ -1,0 +1,11 @@
+<div class="btm-navbar">
+  <% if @golfrange.present? %>
+    <%= link_to 'QueueWall', golf_range_path(@golfrange) %>
+  <% else %>
+    <%= link_to 'QueueWall', golf_range_path(GolfRange.first) %>
+  <% end %>
+  <%= link_to root_path, class:"m-0" do  %>
+    <i class="fas fa-golf-ball"></i>
+  <% end %>
+  <%= link_to 'PlayWall', playwall_posts_path  %>
+</div>
