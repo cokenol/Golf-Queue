@@ -1,0 +1,15 @@
+<div class="card-trip">
+  <img src="https://source.unsplash.com/1920x1080/?golf" />
+  <div class="card-trip-infos">
+    <h2>Level: <%= queue_wall.level %></h2>
+    <h2><%= queue_wall.queue_length %></h2>
+    <div class="votes d-flex">
+      <h2><i class="far fa-thumbs-up p-2"></i></h2>
+      <h2><i class="far fa-thumbs-down p-2"></i></h2>
+    </div>
+  </div>
+  <div class="card-trip-infos">
+    <h2><%= queue_wall.user.email.slice(/\w+@/).gsub("@", "") %></h2>
+    <h2>posted: <%= queue_wall.created_at.strftime("%-d/%b %R") %></h2>
+  </div>
+</div>
