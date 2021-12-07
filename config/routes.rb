@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   get 'golf_ranges/show'
   root to: 'queue_walls#index'
-  resources :queue_walls, only: %i[index new create]
+  resources :queue_walls, only: %i[index new create] do
+    member do
+      post 'toggle_vote', to: "queue_walls#toggle_votes"
+    end
+  end
   resources :playwall_posts, only: %i[index new create] do
     member do
       post 'toggle_favorite', to: "playwall_posts#toggle_favorite"

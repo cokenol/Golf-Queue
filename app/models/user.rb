@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :playwall_posts, dependent: :destroy
   acts_as_favoritor
+  acts_as_voter
 end

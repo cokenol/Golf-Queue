@@ -3,6 +3,7 @@ require 'open-uri'
 
 class QueueWallsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index filter]
+  before_action :authenticate_user!, only: :toggle_votes
 
   def index
     @queues = QueueWall.all
@@ -18,6 +19,11 @@ class QueueWallsController < ApplicationController
   end
 
   def create
+  end
+
+  def toggle_votes
+    @queue = QueueWall.find(params[:id])
+    current_user.voted_up_on?(@queue) ? current_user.dislikes(@queue) : current_user.likes(@queue)
   end
 
   private

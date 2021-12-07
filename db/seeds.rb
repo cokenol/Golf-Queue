@@ -50,9 +50,10 @@ latlong = [[1.2934890689052803, 103.87154692615685],
 20.times do
   user = User.new(
     email: Faker::Internet.email,
-    password: Faker::Internet.password
+    password: Faker::Internet.password,
+    username: Faker::Internet.username
   )
-  puts "creating user #{user.email}"
+  puts "creating user #{user.username}"
   user.save!
 end
 
