@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :golf_ranges do
     resources :queue_walls, only: %i[new create]
   end
-  resources :queue_walls, only: %i[index]
+  resources :queue_walls, only: %i[index] do
+    member do
+      post 'toggle_vote', to: "queue_walls#toggle_votes"
+    end
+  end
   resources :playwall_posts, only: %i[index new create] do
     member do
       post 'toggle_favorite', to: "playwall_posts#toggle_favorite"
