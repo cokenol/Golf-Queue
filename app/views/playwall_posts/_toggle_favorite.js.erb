@@ -1,0 +1,4 @@
+var playwallId = '<%= @playwall.id %>'function toggleLikeButton(playwallId, innerHTML) {
+  let likeButton = document.querySelector(`.like-icon[data-id='${playwallId}']`)
+  likeButton.classList.toggle('red');
+}toggleLikeButton(playwallId);
