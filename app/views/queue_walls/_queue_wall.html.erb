@@ -11,6 +11,7 @@
   </div>
   <div class="card-trip-infos">
     <h2>@<%= queue_wall.user.email.slice(/\w+@/).gsub("@", "") %></h2>
-    <h2>posted: <%= queue_wall.created_at.strftime("%-d/%b %R") %></h2>
+    <h2><%= queue_wall.created_at.strftime("%-d/%b %R") %></h2>
+    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level)  %>
   </div>
 </div>

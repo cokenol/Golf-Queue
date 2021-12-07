@@ -3,6 +3,7 @@ require 'open-uri'
 
 class QueueWallsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index filter]
+  before_action :find_golfrange, only: %i[new create]
 
   def index
     @queues = QueueWall.all
@@ -13,11 +14,19 @@ class QueueWallsController < ApplicationController
 
   def new
     @queue = QueueWall.new
-    @queue.golf_range_id = params[:id]
-    raise
+    @queue.golf_range_id = @golfrange.id
   end
 
   def create
+    @queue = QueueWall.new(queue_wall_params)
+    @queue.user = current_user
+    @queue.golf_range = @golfrange
+    # raise
+    if @queue.save
+      redirect_to @golfrange
+    else
+      render :new, level: @queue.level
+    end
   end
 
   private
@@ -48,4 +57,11 @@ class QueueWallsController < ApplicationController
     weather_array
   end
 
+  def queue_wall_params
+    params.require(:queue_wall).permit(:level, :queue_length, :photo, :golf_range_id, :user_id)
+  end
+
+  def find_golfrange
+    @golfrange = GolfRange.find(params[:golf_range_id])
+  end
 end
