@@ -64,5 +64,6 @@
   <div class="card-trip-infos">
     <h2>@<%= queue_wall.user.username %></h2>
     <p class="text-muted">posted <%= time_ago_in_words(queue_wall.created_at).gsub('about ', '') %> ago</p>
+    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level)  %>
   </div>
 </div>

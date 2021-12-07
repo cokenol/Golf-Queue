@@ -1,0 +1,14 @@
+<div class="btm-navbar" id="navbarSupportedContent">
+  <% if @golfrange.present? %>
+    <%= link_to 'QueueWall', golf_range_path(@golfrange),
+      class: class_names('nav-link', { active: current_page?(golf_range_path(@golfrange)) }) %>
+  <% else %>
+    <%= link_to 'QueueWall', golf_range_path(GolfRange.first),
+     class: class_names('nav-link', { active: current_page?(golf_range_path(GolfRange.first)) }) %>
+  <% end %>
+  <%= link_to root_path, class:"m-0" do  %>
+    <i class="fas fa-golf-ball"></i>
+  <% end %>
+  <%= link_to 'PlayWall', playwall_posts_path,
+    class: class_names('nav-link', { active: current_page?(playwall_posts_path) })  %>
+</div>

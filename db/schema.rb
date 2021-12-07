@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 2021_12_07_053302) do
     t.string "weather"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "photo_url"
     t.float "latitude"
     t.float "longitude"
-    t.string "photo_url"
   end
 
   create_table "playwall_posts", force: :cascade do |t|
