@@ -1,0 +1,48 @@
+
+
+<div>
+  <p>New Post</p>
+
+  <% if playwall_post.photos.attached? %>
+        <% if playwall_post.photos.count > 1 %>
+        <
+          <div id="<%= playwall_post.id %>" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
+              </div>
+              <% playwall_post.photos[1..-1].each do |photo| %>
+              <div class="carousel-item">
+                <%= cl_image_tag photo.key, class: "d-block w-100", crop: :fill %>
+              </div>
+              <% end %>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-target="#<%= playwall_post.id %>" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-target="#<%= playwall_post.id %>" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </button>
+          </div>
+          <% else %>
+            <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
+              </div>
+            </div>
+          </div>
+    <% end %>
+
+  <% else %>
+    <p>You got no photo</p>
+  <% end %>
+
+  <p>location: <%= playwall_post.golf_range.name %> </p>
+  <p>posted by: <%= playwall_post.user.email %> </p>
+  <p>posted at: <%= playwall_post.created_at %> </p>
+  <%= playwall_post.caption %>
+</div>
