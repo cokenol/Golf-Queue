@@ -1,4 +1,4 @@
 <div class="container">
-  <%= render @queues %>
+  <%= render @queues.by_level_and_latest.reverse %>
 </div>
 <%= render 'shared/btm-navbar' %>

@@ -5,5 +5,10 @@ class QueueWall < ApplicationRecord
 
   scope :by_range, ->(given_id) { where(golf_range_id: given_id) }
 
+  scope :by_level_and_latest, -> () do
+    select('DISTINCT ON ("level") *')
+    .order(:level, created_at: :desc)
+  end
+
   acts_as_votable
 end
