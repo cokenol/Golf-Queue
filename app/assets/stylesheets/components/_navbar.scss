@@ -7,16 +7,25 @@
   width: 100%;
   transition: 400ms;
 }
-
+@keyframes slideUp {
+  0% {
+    position: fixed;
+    top: 120%;
+  }
+  100% {
+    top: 60%;
+  }
+}
 
 p.tag-line {
   font-size: 1rem;
   position: fixed;
   top: 0;
   opacity:0;
-  left: 50%;
+  left: 35%;
   color: white;
   transition: 300ms ease-out;
+  // animation: slideUp 300ms ease-out 0;
   transform: translate(-50%, -50%);
 }
 
@@ -54,8 +63,20 @@ h2.logo-text{
   left: 50%;
   color: white;
   transition: 300ms ease-out;
+  // animation: zoomIn 500ms ease-out 0;
   transform: translate(-50%, -50%);
 }
+
+@keyframes zoomIn {
+  0% {
+    font-size: 1rem;
+  }
+  100% {
+    font-size: 10rem;
+  }
+}
+
+
 // ANIMATION STEP 1
 .navbar-lewagon.navbar-animate-one{
   .golf-logo{
@@ -88,7 +109,7 @@ h2.logo-text{
   min-height: 100vh;
 
   .nav-icon {
-    top: 30%;
+    top: 25%;
     opacity: 1;
     transform: translate(-50%, -50%);
   }
