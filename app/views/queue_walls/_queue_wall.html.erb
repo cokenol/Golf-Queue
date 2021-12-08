@@ -22,10 +22,13 @@
                   style: "color:black;",
                   remote: true,
                   method: :post,
+                  value: user_signed_in?,
                   data: {
                   vote_button_target: 'emptyLikeBtn',
+                  # current_user_id: current_user ? current_user.id : 'null',
                   action: 'click->vote-button#like'
                 } %>
+        <div class="alert alert-info d-none" role="alert" data-vote-button-target="alertNotif">You need to sign in to vote! <%= link_to "Sign up here if you are a new user!", new_user_registration_path %></div>
       <% end %>
       <h2 class="align-self-center" data-vote-button-target="upcounter" value="<%= queue_wall.get_likes.size %>"><%= queue_wall.get_likes.size %></h2>
       <% if current_user.present? && current_user.voted_down_on?(queue_wall) %>
@@ -46,10 +49,12 @@
                   style: "color:black;",
                   remote: true,
                   method: :post,
+                  value: user_signed_in?,
                   data: {
                   vote_button_target: 'emptyDislikeBtn',
                   action: 'click->vote-button#dislike'
                 } %>
+        <div class="alert alert-info d-none" role="alert" data-vote-button-target="alertNotif">You need to sign in to vote! <%= link_to "Sign up here if you are a new user!", new_user_registration_path %></div>
       <% end %>
       <%# <h2><i class="far fa-thumbs-down p-2"></i></h2> %>
 
