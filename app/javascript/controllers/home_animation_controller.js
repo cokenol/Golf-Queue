@@ -19,13 +19,15 @@ export default class extends Controller {
     setTimeout(() => {
       this.navbarTarget.classList.remove("navbar-animate-one");
       setTimeout(() => {
-        this.navbarTarget.classList.remove("navbar-animate-two")
-      }, 800);
-    }, 800);
-    /**
-     * CLEAN THIS SHIT
-     */
-    // Anytime the controller is connected to the DOM
+        this.navbarTarget.classList.remove("navbar-animate-two");
+        setTimeout(() => {
+          this.navbarTarget.classList.remove("navbar-animate-three");
+          setTimeout(() => {
+            this.navbarTarget.classList.remove("navbar-animate-four");
+          }, 300);
+        }, 300);
+      }, 300);
+    }, 1500);
     console.log("Home Animation Controller Connected!");
 
   }
