@@ -11,10 +11,6 @@ class PlaywallPostsController < ApplicationController
   end
 
   def create
-    @tempfile = params["playwall_post"]["photos"].first.tempfile.path
-    data = Exif::Data.new(File.open(@tempfile))
-    puts data
-    raise
     @playwall = PlaywallPost.new(post_params)
     @playwall.user = current_user
     redirect_to playwall_posts_path if @playwall.save
