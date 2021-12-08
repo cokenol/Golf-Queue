@@ -22,7 +22,8 @@ export default class extends Controller {
       // update the UI with the right class
     if (this.emptyLikeBtnTarget.getAttribute("value") === 'false') {
       this.alertNotifTarget.classList.remove("d-none");
-      setTimeout(() => { this.alertNotifTarget.classList.add("d-none"); }, 5000);
+      this.alertNotifTarget.classList.add("animate__fadeInUp");
+      setTimeout(() => { this.alertNotifTarget.classList.add("animate__fadeOutDown"); }, 5000);
     }
     else {
       this.emptyLikeBtnTarget.className = "";
@@ -39,7 +40,8 @@ export default class extends Controller {
   dislike(event) {
     if (this.emptyDislikeBtnTarget.getAttribute("value") === 'false') {
       this.alertNotifTarget.classList.remove("d-none");
-      setTimeout(() => { this.alertNotifTarget.classList.add("d-none"); }, 5000);
+      this.alertNotifTarget.classList.add("animate__fadeInUp");
+      setTimeout(() => { this.alertNotifTarget.classList.add("animate__fadeOutDown"); }, 5000);
     }
     else {
       this.emptyDislikeBtnTarget.className = "";
