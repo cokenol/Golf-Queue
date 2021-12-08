@@ -20,8 +20,12 @@ class QueueWallsController < ApplicationController
   end
 
   def create
+    @tempfile = params["queue_wall"]["photo"].tempfile.path
+    data = Exif::Data.new(File.open(@tempfile))
     @queue = QueueWall.new(queue_wall_params)
+    image_date = "#{data.ifds[:exif][:date_time_original].split.first.gsub(":","/")} #{data.ifds[:exif][:date_time_original].split.last}"
     @queue.user = current_user
+    @queue.image_time = DateTime.parse(image_date)
     @queue.golf_range = @golfrange
     # raise
     if @queue.save
