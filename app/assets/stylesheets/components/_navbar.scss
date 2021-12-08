@@ -22,10 +22,10 @@ p.tag-line {
   position: fixed;
   top: 0;
   opacity:0;
-  left: 50%;
+  left: 35%;
   color: white;
   transition: 300ms ease-out;
-  animation: slideUp 300ms ease-out 0;
+  // animation: slideUp 300ms ease-out 0;
   transform: translate(-50%, -50%);
 }
 
@@ -63,7 +63,7 @@ h2.logo-text{
   left: 50%;
   color: white;
   transition: 300ms ease-out;
-  animation: zoomIn 500ms ease-out 0;
+  // animation: zoomIn 500ms ease-out 0;
   transform: translate(-50%, -50%);
 }
 
