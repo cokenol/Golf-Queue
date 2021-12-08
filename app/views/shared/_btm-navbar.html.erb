@@ -1,4 +1,4 @@
-<div class="btm-navbar" id="navbarSupportedContent">
+<div class="btm-navbar" id="navbarFooterContent">
   <% if @golfrange.present? %>
     <%= link_to 'QueueWall', golf_range_path(@golfrange),
       class: class_names('nav-link', { active: current_page?(golf_range_path(@golfrange)) }) %>

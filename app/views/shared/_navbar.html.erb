@@ -1,13 +1,13 @@
 <div data-controller="home-animation">
-  <div class="navbar navbar-expand-sm navbar-dark navbar-lewagon" data-home-animation-target="navbar">
+  <div class="navbar navbar-expand-sm navbar-dark navbar-lewagon <%= (current_page?(root_path) && current_user.nil?) ? "navbar-animate-two navbar-animate-one" : "" %>" data-home-animation-target="navbar">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <h2 class="d-flex align-items-center" data-home-animation-target="text">
-        <div class="golf-logo" data-home-animation-target="golf">Golf</div>
-        <div class="queue-logo" data-home-animation-target="queue">Queue</div>
+      <h2 class="d-flex align-items-center logo-text">
+        <div class="golf-logo">Golf</div>
+        <div class="queue-logo">Queue</div>
       </h2>
     <% end %>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-home-animation-target="avatar">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -38,5 +38,6 @@
     </div>
 
     <div class="nav-icon" data-home-animation-target="icon"><i class="fas fa-golf-ball"></i></div>
+    <p class="tag-line">Got long queue ah?</p>
   </div>
 </div>
