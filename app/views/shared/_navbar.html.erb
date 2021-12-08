@@ -1,15 +1,15 @@
-<div class="navbar navbar-expand-sm navbar-dark navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <h2 class="d-flex">
-      <div class="golf-logo">Golf</div>
-      <div class="queue-logo">Queue</div>
-    </h2>
-  <% end %>
+<div data-controller="home-animation">
+  <div class="navbar navbar-expand-sm navbar-dark navbar-lewagon" data-home-animation-target="navbar">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <h2 class="d-flex align-items-center" data-home-animation-target="text">
+        <div class="golf-logo" data-home-animation-target="golf">Golf</div>
+        <div class="queue-logo" data-home-animation-target="queue">Queue</div>
+      </h2>
+    <% end %>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-home-animation-target="avatar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -41,5 +41,8 @@
         </li>
       <% end %>
     </ul>
+   </div>
+
+  <div class="nav-icon" data-home-animation-target="icon"><i class="fas fa-golf-ball"></i></div>
   </div>
 </div>
