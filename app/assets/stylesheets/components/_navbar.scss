@@ -37,12 +37,13 @@ h2.logo-text{
   color: yellow;
 
   .golf-logo {
+    transition: 300ms ease-out;
     color: #edf5e1;
   }
-}
 
-.nav-display-none {
-  display: none;
+  .queue-logo {
+
+  }
 }
 
 .nav-icon {
@@ -55,17 +56,35 @@ h2.logo-text{
   transition: 300ms ease-out;
   transform: translate(-50%, -50%);
 }
-
 // ANIMATION STEP 1
 .navbar-lewagon.navbar-animate-one{
-  h2.logo-text{
+  .golf-logo{
     font-size: 4.5rem;
   }
-
+  h2.logo-text{
+    transform: translateX(28vw);
+  }
 }
 
-/* ANIMATION  STEP 2*/
-.navbar-lewagon.navbar-animate-two {
+// ANIMATION STEP 2
+.navbar-lewagon.navbar-animate-two{
+  .queue-logo {
+    display: none;
+  }
+  h2.logo-text{
+    transform: translateX(28vw);
+  }
+}
+
+/* ANIMATION STEP 3
+.navbar-lewagon.navbar-animate-three{
+  h2.logo-text{
+    transform: translateX(6rem);
+  }
+} */
+
+/* ANIMATION  STEP 4*/
+.navbar-lewagon.navbar-animate-four {
   min-height: 100vh;
 
   .nav-icon {
