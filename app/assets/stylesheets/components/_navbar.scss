@@ -1,6 +1,26 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: #05386b;
+  height: 70px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.nav-transition {
+  transition: 400ms ease-out;
+}
+.navbar-full {
+  height: 100vh;
+  font-size: 5rem;
+}
+
+.nav-text-center{
+  transform: translateX(6rem);
+}
+
+.nav-text-large{
+  font-size: 5rem;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -17,4 +37,24 @@
   .golf-logo {
     color: #edf5e1;
   }
+}
+
+.nav-display-none {
+  display: none;
+}
+
+.nav-display-true {
+
+  .nav-icon {
+    display: block;
+  }
+}
+
+.nav-icon {
+  font-size: 10rem;
+  position: fixed;
+  top: 15vh;
+  left: 35%;
+  color: white;
+  display: none;
 }
