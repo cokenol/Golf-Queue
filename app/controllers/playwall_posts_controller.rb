@@ -4,7 +4,16 @@ class PlaywallPostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @pagy, @playwall = pagy(PlaywallPost.all)
+    @pagy, @playwall = pagy(PlaywallPost.all.by_latest)
+
+    respond_to do |format|
+        format.html
+        format.json {
+          render json: { entries: render_to_string(partial: "playwall_posts", locals: { playwall_posts: @playwall }, formats: [:html]),
+         pagination: view_context.pagy_nav(@pagy)}
+        }
+    end
+
   end
 
   def new

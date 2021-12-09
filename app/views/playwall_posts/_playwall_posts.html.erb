@@ -1,5 +1,5 @@
 
-
+<% playwall_posts.each do |playwall_post| %>
     <div class="card-trip">
           <div class="card-trip-infos">
             <h2>@<%= playwall_post.user.username %></h2>
@@ -73,3 +73,5 @@
       <p class="text-muted">posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
     </div>
   </div>
+
+<% end %>
