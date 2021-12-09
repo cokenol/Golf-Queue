@@ -1,5 +1,6 @@
 <div class="container">
-<%= link_to "New Post", new_playwall_post_path, class: "btn btn-primary"  %>
-<%= render @playwall %>
+  <%= link_to "New Post", new_playwall_post_path, class: "btn btn-primary"  %>
+  <%= render @playwall %>
+  <%== pagy_nav(@pagy) %>
 </div>
 <%= render 'shared/btm-navbar' %>

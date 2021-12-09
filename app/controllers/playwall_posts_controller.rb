@@ -1,9 +1,10 @@
+ include Pagy::Backend
+
 class PlaywallPostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @playwall = PlaywallPost.all
-
+    @pagy, @playwall = pagy(PlaywallPost.all)
   end
 
   def new
