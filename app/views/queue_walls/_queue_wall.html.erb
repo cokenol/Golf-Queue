@@ -1,5 +1,9 @@
 <div class="card-trip" data-controller="vote-button">
-  <img src="https://source.unsplash.com/1920x1080/?golf" />
+
+  <% if queue_wall.photo.attached? %>
+  <%= cl_image_tag queue_wall.photo.key, crop: :fill %>
+  <% end %>
+
   <div class="card-trip-infos">
     <h2><%= queue_wall.level %>:</h2>
     <h2><%= queue_wall.queue_length %> pax in queue</h2>
@@ -63,6 +67,7 @@
       <% else %>
         <h2 class="align-self-center" data-vote-button-target="downcounter" value="<%= queue_wall.get_dislikes.size %>">-<%= queue_wall.get_dislikes.size %></h2>
       <% end %>
+      <%= link_to "", new_reports_path, class: "fas fa-exclamation-circle card-trip-infos align-self-center" %>
 
     </div>
   </div>
@@ -77,6 +82,7 @@
       <p class="text-muted"><i class="far fa-clock"></i>posted <%= time_ago_in_words(queue_wall.created_at).gsub('about ', '') %> ago</p>
     <% end %>
 
-    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level)  %>
+    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level), class: "btn btn-primary" %>
   </div>
+
 </div>
