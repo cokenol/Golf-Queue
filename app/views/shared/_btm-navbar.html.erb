@@ -6,9 +6,18 @@
     <%= link_to 'QueueWall', golf_range_path(GolfRange.first),
      class: class_names('nav-link', { active: current_page?(golf_range_path(GolfRange.first)) }) %>
   <% end %>
-  <%= link_to root_path, class:"m-0" do  %>
-    <i class="fas fa-golf-ball"></i>
+
+  <% if current_page?(playwall_posts_path) %>
+    <%= link_to new_playwall_post_path, class:"m-0" do  %>
+      <i class="far fa-plus-square"></i></i>
+    <% end %>
+  <% else %>
+    <%= link_to root_path, class:"m-0" do  %>
+      <i class="fas fa-golf-ball"></i>
+    <% end %>
   <% end %>
+
+
   <%= link_to 'PlayWall', playwall_posts_path,
     class: class_names('nav-link', { active: current_page?(playwall_posts_path) })  %>
 </div>

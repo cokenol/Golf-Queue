@@ -1,8 +1,8 @@
-<h1>PlaywallPosts#new</h1>
-<p>Find me in app/views/playwall_posts/new.html.erb</p>
-<%= simple_form_for(@playwall) do |f| %>
-    <%= f.input :caption, label: "What's on your mind?" %>
-    <%= f.association :golf_range, label: "Location"  %>
-    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-    <%= f.submit "Create New Post" %>
-<% end %>
+<div class="container">
+  <%= simple_form_for(@playwall) do |f| %>
+      <%= f.input :caption, label: "What's on your mind?" %>
+      <%= f.association :golf_range, label: "Location"  %>
+      <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+      <%= f.submit "Create New Post", class: "btn btn-primary" %>
+  <% end %>
+</div>
