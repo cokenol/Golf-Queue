@@ -1,54 +1,55 @@
 <div data-controller="home-animation">
-  <div class="navbar navbar-expand-sm navbar-dark navbar-lewagon <%= (current_page?(root_path) && current_user.nil?) ? "navbar-animate-two navbar-animate-one navbar-animate-three navbar-animate-four" : "" %>" data-home-animation-target="navbar">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <h2 class="d-flex align-items-center logo-text">
-        <div class="golf-logo">Golf</div>
-        <div class="queue-logo">Queue</div>
-      </h2>
-      <p class="tag-line animate__animated animate__rubberBand">Got long queue ah?</p>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-        <li class="nav-item active">
-          <%= link_to "Home", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Messages", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item dropdown">
-
-          <% if current_user.photo.attached? %>
-            <%= cl_image_tag current_user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <% else %>
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <% end %>
-
-
-
-
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to current_user.username, "#", class: "dropdown-item" %>
-            <%= link_to "My Post", playwall_posts_path, class: "dropdown-item" %>
-            <%= link_to "Update Profile", edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </div>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </li>
+  <div>
+    <div class="navbar navbar-expand-sm navbar-dark navbar-lewagon <%= (current_page?(root_path) && current_user.nil?) ? "animate-initial" : "" %>"  data-home-animation-target="navbar">
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <h2 class="d-flex align-items-center logo-text">
+          <div class="golf-logo">Golf</div>
+          <div class="queue-logo">Queue</div>
+        </h2>
+        <p class="tagline-outer">
+          Got long queue ah?
+        </p>
       <% end %>
-    </ul>
-   </div>
 
-  <div class="animate__animated <%= (current_page?(root_path) && current_user.nil?) ? "animate__zoomInDown animate__delay-1s" : "" %> nav-icon" data-home-animation-target="icon"><i class="fas fa-golf-ball"></i></div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to "Home", "#", class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Messages", "#", class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown">
+
+              <% if current_user.photo.attached? %>
+                <%= cl_image_tag current_user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <% else %>
+                <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <% end %>
 
 
+
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <%= link_to current_user.username, "#", class: "dropdown-item" %>
+                <%= link_to "My Post", playwall_posts_path, class: "dropdown-item" %>
+                <%= link_to "Update Profile", edit_user_registration_path, class: "dropdown-item" %>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="nav-icon"><i class="fas fa-golf-ball"></i></div>
+    </div>
   </div>
 </div>
