@@ -1,5 +1,5 @@
 class PlaywallPostsController < ApplicationController
-  before_action :authenticate_user!, only: :toggle_favorite
+  before_action :authenticate_user!
 
   def index
     @playwall = PlaywallPost.all
