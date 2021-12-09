@@ -67,6 +67,7 @@
       <% else %>
         <h2 class="align-self-center" data-vote-button-target="downcounter" value="<%= queue_wall.get_dislikes.size %>">-<%= queue_wall.get_dislikes.size %></h2>
       <% end %>
+      <%= link_to "", new_reports_path, class: "fas fa-exclamation-circle card-trip-infos align-self-center" %>
 
     </div>
   </div>
@@ -83,4 +84,5 @@
 
     <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level), class: "btn btn-primary" %>
   </div>
+
 </div>

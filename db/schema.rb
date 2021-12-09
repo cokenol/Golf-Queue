@@ -94,6 +94,16 @@ ActiveRecord::Schema.define(version: 2021_12_09_041537) do
     t.index ["user_id"], name: "index_queue_walls_on_user_id"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.text "content"
+    t.bigint "playwall_post_id", null: false
+    t.bigint "queue_wall_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playwall_post_id"], name: "index_reports_on_playwall_post_id"
+    t.index ["queue_wall_id"], name: "index_reports_on_queue_wall_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -133,4 +143,6 @@ ActiveRecord::Schema.define(version: 2021_12_09_041537) do
   add_foreign_key "playwall_posts", "users"
   add_foreign_key "queue_walls", "golf_ranges"
   add_foreign_key "queue_walls", "users"
+  add_foreign_key "reports", "playwall_posts"
+  add_foreign_key "reports", "queue_walls"
 end
