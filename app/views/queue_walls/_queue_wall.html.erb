@@ -67,7 +67,7 @@
       <% else %>
         <h2 class="align-self-center" data-vote-button-target="downcounter" value="<%= queue_wall.get_dislikes.size %>">-<%= queue_wall.get_dislikes.size %></h2>
       <% end %>
-      <%= link_to "", new_reports_path, class: "fas fa-exclamation-circle card-trip-infos align-self-center" %>
+      <%= link_to "", new_queue_wall_queue_wall_reports_path(queue_wall), class: "fas fa-exclamation-circle card-trip-infos align-self-center" %>
 
     </div>
   </div>
