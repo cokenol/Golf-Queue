@@ -35,6 +35,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'faker'
 gem 'acts_as_votable'
+gem 'pagy'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
