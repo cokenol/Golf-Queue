@@ -29,7 +29,6 @@ export default class extends Controller {
       }, 300);
     }, 1800);
     console.log("Home Animation Controller Connected!");
-
   }
 
   disconnect() {
