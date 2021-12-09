@@ -5,9 +5,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :playwall_posts, dependent: :destroy
+  has_many :queue_walls, dependent: :destroy
   has_one_attached :photo
   acts_as_favoritor
   acts_as_voter
+
+  def fbsignup
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

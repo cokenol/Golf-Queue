@@ -16,6 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
+    flash[:notice] = "Facebook Authentication Failed!"
     redirect_to root_path
   end
 end
