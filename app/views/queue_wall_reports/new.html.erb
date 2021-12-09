@@ -2,10 +2,9 @@
 <div class="container">
   <h1>I want to report you</h1>
 
-  <%= simple_form_for(@report) do |f| %>
+  <%= simple_form_for [ @queue, @report ] do |f| %>
     <%= f.input :content %>
     <%= f.input :photo, as: :file %>
     <%= f.submit %>
-    <%= raise %>
   <% end %>
 </div>

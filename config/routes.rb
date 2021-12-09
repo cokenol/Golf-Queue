@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :queue_walls, only: %i[new create]
   end
   resources :queue_walls, only: %i[index] do
+    resource :queue_wall_reports, only: %i[new create]
     member do
       post 'toggle_vote', to: "queue_walls#toggle_votes"
     end
@@ -17,7 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :golf_ranges, only: %i[show]
-  resource :reports, only: %i[new create]
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

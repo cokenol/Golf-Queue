@@ -1,5 +1,11 @@
 <div class="container">
-<%# <%= link_to "New Post", new_playwall_post_path, class: "btn btn-primary"  %>
-<%= render @playwall %>
+  <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
+    <div data-infinite-scroll-target="entries">
+      <%= render @playwall %>
+    </div>
+    <div data-infinite-scroll-target="pagination">
+      <%== pagy_nav(@pagy) %>
+    </div>
+  </div>
 </div>
 <%= render 'shared/btm-navbar' %>

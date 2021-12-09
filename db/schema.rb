@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_041537) do
+ActiveRecord::Schema.define(version: 2021_12_09_092411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 2021_12_09_041537) do
     t.string "weather"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "photo_url"
     t.float "latitude"
     t.float "longitude"
-    t.string "photo_url"
   end
 
   create_table "playwall_posts", force: :cascade do |t|
@@ -82,6 +82,14 @@ ActiveRecord::Schema.define(version: 2021_12_09_041537) do
     t.index ["user_id"], name: "index_playwall_posts_on_user_id"
   end
 
+  create_table "queue_wall_reports", force: :cascade do |t|
+    t.text "content"
+    t.bigint "queue_wall_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["queue_wall_id"], name: "index_queue_wall_reports_on_queue_wall_id"
+  end
+
   create_table "queue_walls", force: :cascade do |t|
     t.integer "queue_length"
     t.string "level"
@@ -92,16 +100,6 @@ ActiveRecord::Schema.define(version: 2021_12_09_041537) do
     t.datetime "image_time"
     t.index ["golf_range_id"], name: "index_queue_walls_on_golf_range_id"
     t.index ["user_id"], name: "index_queue_walls_on_user_id"
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.text "content"
-    t.bigint "playwall_post_id", null: false
-    t.bigint "queue_wall_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["playwall_post_id"], name: "index_reports_on_playwall_post_id"
-    t.index ["queue_wall_id"], name: "index_reports_on_queue_wall_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -141,8 +139,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_041537) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "playwall_posts", "golf_ranges"
   add_foreign_key "playwall_posts", "users"
+  add_foreign_key "queue_wall_reports", "queue_walls"
   add_foreign_key "queue_walls", "golf_ranges"
   add_foreign_key "queue_walls", "users"
-  add_foreign_key "reports", "playwall_posts"
-  add_foreign_key "reports", "queue_walls"
 end
