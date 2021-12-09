@@ -7,33 +7,18 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["navbar", "text", "golf", "queue", "avatar", "icon", "login"];
-
-  initialize() {
-    // Once, when the controller is first instantiated
-    console.log("Generated Controller Initialized!");
-  }
+  static targets = ["navbar"];
 
   connect() {
-    // set the timeout
-    setTimeout(() => {
-      this.navbarTarget.classList.remove("navbar-animate-one");
-      setTimeout(() => {
-        this.navbarTarget.classList.remove("navbar-animate-two");
-        setTimeout(() => {
-          this.navbarTarget.classList.remove("navbar-animate-three");
-          setTimeout(() => {
-            this.navbarTarget.classList.remove("navbar-animate-four");
-          }, 300);
-        }, 300);
-      }, 300);
-    }, 1800);
-    console.log("Home Animation Controller Connected!");
-  }
+    if (window.location.href == "http://localhost:3000/" || window.location.href == "https://golf-queue.herokuapp.com/") {
+      this.navbarTarget.classList.add("animate-action");
+    }
 
-  disconnect() {
-    // Anytime the controller is disconnected from the DOM
-    console.log("Home Animation Controller Disconnected!");
+    setTimeout(() => {
+      this.navbarTarget.classList.remove("animate-initial", "animate-action")
+    }, 2000);
+
+    console.log(this.navbarTarget.classList);
   }
 
 }
