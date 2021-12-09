@@ -1,6 +1,6 @@
-    <div class="card-trip">
-          <div class="card-trip-infos">
-          <h2 class="pt-2">
+<div class="card-trip">
+      <div class="card-trip-infos">
+        <h2 class="pt-2">
           <% if current_user.photo.attached? %>
             <%= cl_image_tag current_user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar" %>
           <% elsif current_user.image.present? %>
@@ -8,9 +8,9 @@
           <% else %>
             <i class="far fa-user-circle avatar fa-2x text-white"></i>
           <% end %>
-          @<%= playwall_post.user.username %></h2>
-            <p class="text-muted"><%= playwall_post.golf_range.name %></p>
-          </div>
+        @<%= playwall_post.user.username %></h2>
+        <p class="text-muted"><%= playwall_post.golf_range.name %></p>
+      </div>
         <% if playwall_post.photos.attached? %>
           <% if playwall_post.photos.count > 1 %>
             <div id="<%= playwall_post.id %>photos" class="carousel slide" data-ride="carousel">
@@ -23,7 +23,7 @@
                   <%= cl_image_tag photo.key, class: "d-block w-100", crop: :fill %>
                 </div>
                 <% end %>
-              </div>
+            </div>
 
               <button class="carousel-control-prev" type="button" data-target="#<%= playwall_post.id %>photos" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -35,7 +35,7 @@
               </button>
             </div>
             <% else %>
-              <div class="carousel slide" data-ride="carousel">
+            <div class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
@@ -44,33 +44,31 @@
             </div>
       <% end %>
     <% end %>
-
-
-    <div class="card-trip-infos pt-2" data-controller="like-button">
-      <h2>
+  <div class="card-trip-infos pt-2" data-controller="like-button">
+    <h2>
       <% if playwall_post.favoritors.include?(current_user) %>
 
-    <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
-                             class: "fas fa-heart",
-                             style: "color:#bf0206;",
-                             remote: true,
-                             method: :post,
-                             data: {
-                             like_button_target: 'likebtn',
-                             action: 'click->like-button#like'
-                           } %>
-    <% else %>
-          <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
-                             class: "far fa-heart",
-                             style: "color:black;",
-                             remote: true,
-                             method: :post,
-                             data: {
-                             like_button_target: 'unlikebtn',
-                             action: 'click->like-button#unlike'
-                           } %>
-    <% end %>
-    <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
+      <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
+                              class: "fas fa-heart",
+                              style: "color:#bf0206;",
+                              remote: true,
+                              method: :post,
+                              data: {
+                              like_button_target: 'likebtn',
+                              action: 'click->like-button#like'
+                            } %>
+      <% else %>
+            <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
+                              class: "far fa-heart",
+                              style: "color:black;",
+                              remote: true,
+                              method: :post,
+                              data: {
+                              like_button_target: 'unlikebtn',
+                              action: 'click->like-button#unlike'
+                            } %>
+      <% end %>
+      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
   </div>
   <div class="card-trip-infos pt-3">
     <p><%= playwall_post.caption %></p>
@@ -78,3 +76,4 @@
   <div class="card-trip-infos pt-3">
     <p class="text-muted"><i class="far fa-clock"></i> posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
   </div>
+</div>
