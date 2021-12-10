@@ -75,7 +75,11 @@
     <h6><%= playwall_post.caption %></h6>
   </div>
   <div class="card-trip-infos pt-3">
-    <%= link_to "new comment", new_playwall_post_comment_path(playwall_post)  %>
+    <% rand_comment = playwall_post.comments.sample %>
+    <span><b><%= rand_comment.user.username %></b> <%= rand_comment.content %></span>
+  </div>
+  <div class="card-trip-infos">
+      <%= link_to "View all comment", playwall_post_comments_path(playwall_post)  %>
   </div>
   <div class="card-trip-infos pt-3">
     <p class="text-muted"><i class="far fa-clock"></i> posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
