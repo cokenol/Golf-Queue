@@ -2,12 +2,15 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @pagy, @comments = pagy(Comment.all.by_latest)
+    @comment = Comment.new
+    @playwall = PlaywallPost.find(params[:playwall_post_id])
+    @comment.playwall_post = @playwall
 
+    @pagy, @comments = pagy(Comment.all.by_latest, items: 15)
     respond_to do |format|
         format.html
         format.json {
-         render json: { entries: render_to_string(partial: "comments", locals: { comment: @comments }, formats: [:html]),
+         render json: { entries: render_to_string(partial: "comments", locals: { comments: @comments }, formats: [:html]),
          pagination: view_context.pagy_nav(@pagy)}
         }
     end
@@ -29,7 +32,7 @@ class CommentsController < ApplicationController
     @playwall = PlaywallPost.find(params[:playwall_post_id])
     @comment.user = current_user
     @comment.playwall_post = @playwall
-    redirect_to playwall_posts_path if @comment.save
+    redirect_to playwall_post_comments_path if @comment.save
   end
 
   private

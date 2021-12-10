@@ -18,6 +18,7 @@ export default class extends Controller {
     }
 
     this.intersectionObserver = new IntersectionObserver(entries => this.processIntersectionEntries(entries), options)
+    console.log(this.intersectionObserver);
   }
 
   connect() {
@@ -47,8 +48,10 @@ export default class extends Controller {
 
 
   processIntersectionEntries(entries) {
+    console.log('hello intersection');
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        console.log('hitting the intersection');
         this.loadMore()
       }
     })
@@ -68,7 +71,8 @@ export default class extends Controller {
         console.log(this.paginationTarget);
         console.log(data.pagination);
         this.paginationTarget.innerHTML = data.pagination;
-      }
+      },
+      error: (e) => { console.log(`something went wrong: ${e}`)}
     })
   }
 }
