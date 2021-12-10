@@ -23,7 +23,10 @@ class PlaywallPostsController < ApplicationController
   def create
     @playwall = PlaywallPost.new(post_params)
     @playwall.user = current_user
-    redirect_to playwall_posts_path if @playwall.save
+    @playwall.save
+    respond_to do |format|
+      format.json { render json: { status: 'success' }  }
+    end
   end
 
   def toggle_favorite
