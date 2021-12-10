@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_092411) do
+ActiveRecord::Schema.define(version: 2021_12_10_014255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(version: 2021_12_09_092411) do
     t.float "latitude"
     t.float "longitude"
     t.string "photo_url"
+  end
+
+  create_table "play_wall_reports", force: :cascade do |t|
+    t.text "content"
+    t.bigint "playwall_post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playwall_post_id"], name: "index_play_wall_reports_on_playwall_post_id"
   end
 
   create_table "playwall_posts", force: :cascade do |t|
@@ -137,6 +145,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_092411) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "play_wall_reports", "playwall_posts"
   add_foreign_key "playwall_posts", "golf_ranges"
   add_foreign_key "playwall_posts", "users"
   add_foreign_key "queue_wall_reports", "queue_walls"

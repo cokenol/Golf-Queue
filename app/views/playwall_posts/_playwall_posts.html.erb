@@ -64,7 +64,9 @@
                               action: 'click->like-button#unlike'
                             } %>
       <% end %>
-      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
+      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span><
+        </h2>
+      <%=link_to "", new_playwall_post_play_wall_report_path(playwall_post), class: "fas fa-exclamation-circle align-left"%>
     </div>
     <div class="card-trip-infos pt-3">
       <p><%= playwall_post.caption %></p>
