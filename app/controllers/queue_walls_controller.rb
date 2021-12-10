@@ -3,9 +3,8 @@ require 'open-uri'
 
 class QueueWallsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index filter]
-  before_action :authenticate_user!, only: :toggle_votes
+  before_action :authenticate_user!
   before_action :find_golfrange, only: %i[new create]
-
 
   def index
     @queues = QueueWall.all
