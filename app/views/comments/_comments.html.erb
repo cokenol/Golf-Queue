@@ -1,5 +1,6 @@
 <% comments.each do |comment| %>
 <ul class="list-group list-group-flush">
   <li class="list-group-item"><b><%= comment.user.username %></b> <%= comment.content %></li>
+  <%= raise %>
 </ul>
 <% end %>
