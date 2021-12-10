@@ -1,6 +1,6 @@
 <div class="card-trip">
       <div class="card-trip-infos">
-        <h2 class="pt-2">
+        <h2 class="pt-2 d-flex align-items-center">
           <% if playwall_post.user.photo.attached? %>
             <%= cl_image_tag playwall_post.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar" %>
           <% elsif playwall_post.user.image.present? %>
@@ -8,7 +8,7 @@
           <% else %>
             <i class="far fa-user-circle avatar fa-2x text-black"></i>
           <% end %>
-        @<%= playwall_post.user.username %></h2>
+          @<%= playwall_post.user.username %></h2>
         <p class="text-muted"><%= playwall_post.golf_range.name %></p>
       </div>
         <% if playwall_post.photos.attached? %>
