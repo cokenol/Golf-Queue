@@ -12,27 +12,53 @@ import Rails from "@rails/ujs";
 export default class extends Controller {
   static targets = ["entries", "pagination"];
 
+  initialize() {
+    let options = {
+      rootMargin: '200px',
+    }
+
+    this.intersectionObserver = new IntersectionObserver(entries => this.processIntersectionEntries(entries), options)
+  }
+
   connect() {
     // Anytime the controller is connected to the DOM
     console.log("Infinite scrolling Controller Connected!");
+    this.intersectionObserver.observe(this.paginationTarget)
   }
 
-  scroll() {
-    // console.log(window.pageYOffset);
-    let url = this.paginationTarget.querySelector("a[rel='next']").href
-
-    var body = document.body,
-      html = document.documentElement
-
-    var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
-
-    if(window.pageYOffset >= height - window.innerHeight) {
-      // console.log("bottom");
-      this.loadMore(url);
-    }
+  disconnect() {
+    this.intersectionObserver.unobserve(this.paginationTarget)
   }
 
-  loadMore(url) {
+  // scroll() {
+  //   // console.log(window.pageYOffset);
+  //   let url = this.paginationTarget.querySelector("a[rel='next']").href
+
+  //   var body = document.body,
+  //     html = document.documentElement
+
+  //   var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
+
+  //   if(window.pageYOffset >= height - window.innerHeight) {
+  //     // console.log("bottom");
+  //     this.loadMore(url);
+  //   }
+  // }
+
+
+  processIntersectionEntries(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        this.loadMore()
+      }
+    })
+  }
+
+  loadMore() {
+    let next_page = this.paginationTarget.querySelector("a[rel='next']")
+    if (next_page == null) { return }
+    let url = next_page.href
+
     Rails.ajax({
       type: 'GET',
       url: url,
