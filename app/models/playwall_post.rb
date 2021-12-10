@@ -4,6 +4,7 @@ class PlaywallPost < ApplicationRecord
   has_many_attached :photos
   has_many :play_wall_reports
   acts_as_favoritable
+  has_many :comments, dependent: :destroy
 
   scope :by_latest, -> () do
     order(created_at: :desc)

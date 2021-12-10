@@ -72,7 +72,10 @@
       <%=link_to "", new_playwall_post_play_wall_report_path(playwall_post), class: "fas fa-exclamation-circle"%>
   </div>
   <div class="card-trip-infos pt-3">
-    <p><%= playwall_post.caption %></p>
+    <h6><%= playwall_post.caption %></h6>
+  </div>
+  <div class="card-trip-infos pt-3">
+    <%= link_to "new comment", new_playwall_post_comment_path(playwall_post)  %>
   </div>
   <div class="card-trip-infos pt-3">
     <p class="text-muted"><i class="far fa-clock"></i> posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
