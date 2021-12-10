@@ -1,0 +1,17 @@
+<div class="container">
+  <div data-controller="infinite-scroll"> <!--data-action="scroll@window->infinite-scroll#scroll"-->
+    <div data-infinite-scroll-target="entries">
+      <%= render @comments %>
+    </div>
+    <div data-infinite-scroll-target="pagination">
+      <%== pagy_nav(@pagy) %>
+    </div>
+  </div>
+</div>
+
+<div class="btm-commentbar">
+  <%= simple_form_for [ @playwall, @comment ], html: { class: "d-flex justify-content-between align-items-start pt-2", style:"width: 80vw;"} do |f| %>
+  <%= f.input :content, as: :string, class: "mb-0", label: false%>
+  <%= f.submit "New", class: "btn btn-outline-primary" %>
+  <% end %>
+</div>

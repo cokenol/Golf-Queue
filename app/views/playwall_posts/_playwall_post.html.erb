@@ -72,7 +72,14 @@
       <%=link_to "", new_playwall_post_play_wall_report_path(playwall_post), class: "fas fa-exclamation-circle"%>
   </div>
   <div class="card-trip-infos pt-3">
-    <p><%= playwall_post.caption %></p>
+    <h6><%= playwall_post.caption %></h6>
+  </div>
+  <div class="card-trip-infos pt-3">
+    <% rand_comment = playwall_post.comments.sample %>
+    <span><b><%= rand_comment.user.username %></b> <%= rand_comment.content %></span>
+  </div>
+  <div class="card-trip-infos">
+      <%= link_to "View all #{playwall_post.comments.count} comments", playwall_post_comments_path(playwall_post)  %>
   </div>
   <div class="card-trip-infos pt-3">
     <p class="text-muted"><i class="far fa-clock"></i> posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>

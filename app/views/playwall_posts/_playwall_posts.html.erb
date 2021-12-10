@@ -2,7 +2,15 @@
 <% playwall_posts.each do |playwall_post| %>
     <div class="card-trip">
           <div class="card-trip-infos">
-            <h2>@<%= playwall_post.user.username %></h2>
+            <h2 class="pt-2">
+          <% if playwall_post.user.photo.attached? %>
+            <%= cl_image_tag playwall_post.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar" %>
+          <% elsif playwall_post.user.image.present? %>
+            <%= image_tag playwall_post.user.image , class: "avatar" %>
+          <% else %>
+            <i class="far fa-user-circle avatar fa-2x text-black"></i>
+          <% end %>
+        @<%= playwall_post.user.username %></h2>
             <p class="text-muted"><%= playwall_post.golf_range.name %></p>
           </div>
         <% if playwall_post.photos.attached? %>
@@ -64,8 +72,7 @@
                               action: 'click->like-button#unlike'
                             } %>
       <% end %>
-      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span><
-        </h2>
+      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
       <%=link_to "", new_playwall_post_play_wall_report_path(playwall_post), class: "fas fa-exclamation-circle align-left"%>
     </div>
     <div class="card-trip-infos pt-3">
