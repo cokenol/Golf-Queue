@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'comments/index'
+  get 'comments/new'
+  get 'comments/show'
+  get 'comments/create'
   get 'golf_ranges/show'
   root to: 'queue_walls#index'
 
