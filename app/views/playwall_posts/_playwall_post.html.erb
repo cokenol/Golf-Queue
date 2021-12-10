@@ -69,6 +69,7 @@
                             } %>
       <% end %>
       <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
+      <%=link_to "", new_playwall_post_play_wall_report_path(playwall_post), class: "fas fa-exclamation-circle"%>
   </div>
   <div class="card-trip-infos pt-3">
     <p><%= playwall_post.caption %></p>

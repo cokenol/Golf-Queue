@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
   end
   resources :playwall_posts, only: %i[index new create] do
+    resources :play_wall_reports, only: %i[new create]
     member do
       post 'toggle_favorite', to: "playwall_posts#toggle_favorite"
     end
