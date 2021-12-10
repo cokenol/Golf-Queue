@@ -7,11 +7,12 @@ class CommentsController < ApplicationController
     @comment.playwall_post = @playwall
 
     @pagy, @comments = pagy(PlaywallPost.find(params[:playwall_post_id]).comments.by_latest, items: 15)
+    # raise
     respond_to do |format|
         format.html
         format.json {
-         render json: { entries: render_to_string(partial: "comments", locals: { comments: @comments }, formats: [:html]),
-         pagination: view_context.pagy_nav(@pagy)}
+          render json: { entries: render_to_string(partial: "comments", locals: { comments: @comments }, formats: [:html] ),
+          pagination: view_context.pagy_nav(@pagy)}
         }
     end
   end
