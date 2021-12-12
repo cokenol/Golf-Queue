@@ -87,7 +87,11 @@
 
   </div>
   <div class="card-trip-infos">
+    <% if playwall_post.comments.count.zero?  %>
+      <%= link_to "Add a comment", playwall_post_comments_path(playwall_post)  %>
+    <% else %>
       <%= link_to "View all #{playwall_post.comments.count} comments", playwall_post_comments_path(playwall_post)  %>
+    <% end %>
   </div>
     <div class="card-trip-infos pt-3">
       <p class="text-muted"><i class="far fa-clock"></i>posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
