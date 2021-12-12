@@ -16,6 +16,11 @@
         <% if playwall_post.photos.attached? %>
           <% if playwall_post.photos.count > 1 %>
             <div id="<%= playwall_post.id %>photos" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <% playwall_post.photos.each.with_index do |photo, index| %>
+                <li data-target="#<%= playwall_post.id %>photos" data-slide-to="<%= index %>" class="<%= index.zero? ? "active" : "" %>"></li>
+              <% end %>
+            </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
