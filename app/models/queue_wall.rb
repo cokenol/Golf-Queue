@@ -12,4 +12,6 @@ class QueueWall < ApplicationRecord
   end
 
   acts_as_votable
+
+  validates :queue_length, inclusion: { in: (0..30) }
 end
