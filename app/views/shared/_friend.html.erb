@@ -1,0 +1,20 @@
+<div class="card-product">
+      <% if @friend.image.present? %>
+        <%= image_tag friend.image %>
+      <% else %>
+        <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+      <% end %>
+      <div class="card-product-infos">
+        <h2>@<%= friend.username %></h2>
+        <p>Something about the friend here</p>
+      </div>
+      <div>
+      <%= link_to "", class: "dropdown", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false  do %>
+        <i class="fas fa-ellipsis-h text-dark"></i>
+        <% end %>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <%= link_to "Remove Friend", delete_friend_path(friend), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= link_to "Block Friend", block_friend_path(friend), class: "dropdown-item text-danger",  method: :post, data: { confirm: "Are you sure?" } %>
+        </div>
+      </div>
+</div>

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  delete '/friends/:id', to: 'friendlists#delete_friend', as: 'delete_friend'
+  post '/friends/block/:id', to: 'friendlists#block_friend', as: 'block_friend'
+  post '/friends/unblock/:id', to: 'friendlists#unblock_friend', as: 'unblock_friend'
+  get '/friends', to: 'friendlists#friends_list', as: 'friends'
+  get '/friends/search', to: 'friendlists#search_friend', as: 'search_friends'
+  get '/friends/add/:id', to: 'friendlists#add_friend', as: 'add_friend'
+  get '/friends/accept/:id', to: 'friendlists#accept_friend', as: 'accept_friend'
+  get '/friends/decline/:id', to: 'friendlists#decline_friend', as: 'decline_friend'
   root to: 'queue_walls#index'
 
   resources :golf_ranges do
@@ -20,5 +28,8 @@ Rails.application.routes.draw do
 
   resources :golf_ranges, only: %i[show]
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
