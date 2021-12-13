@@ -1,7 +1,7 @@
 .card-category {
   background-size: cover;
   background-position: center;
-  height: 120px;
+  height: 110px;
   // display: flex;
   // justify-content: space-between;
   // align-items: space-between;
@@ -13,6 +13,7 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   margin: 1rem auto;
   padding: 0.5rem;
+  position: relative;
 
   small{
     font-weight: bolder;
@@ -20,6 +21,23 @@
   .traffic-status h4 {
     margin-bottom: 0;
   }
+
+  .weather-status {
+    background: rgba(60, 200, 60, 0.6);
+    border-radius: 2rem;
+  }
+
+  .queue-status {
+    border: 1px solid white;
+    border-radius: 0.5rem;
+    margin: 0 1rem;
+  }
+}
+
+
+.weather-and-traffic {
+  position: absolute;
+  bottom: 0.2rem;
 }
 
 .card-trip {
