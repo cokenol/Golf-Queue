@@ -78,7 +78,12 @@
                             } %>
       <% end %>
       <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
-      <%=link_to "", new_playwall_post_play_wall_report_path(playwall_post), class: "fas fa-exclamation-circle align-left"%>
+      <div class="dropdown">
+        <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown"></button>
+            <div class="dropdown-menu dropdown-menu-right ">
+              <%= link_to "Submit Violation", new_playwall_post_play_wall_report_path(playwall_post)%>
+            </div>
+      </div>
     </div>
     <div class="card-trip-infos pt-3">
       <h6><%= playwall_post.caption %></h6>
