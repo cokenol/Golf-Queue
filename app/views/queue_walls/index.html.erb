@@ -40,6 +40,35 @@
       </div>
     <% end %>
   <% end %>
+  <div class="card-category d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8))">
+    <h4>Legend:</h4>
+    <div class="queue-pax-info">
+      <div class="m-0 d-flex justify-content-around align-items-center">
+        <p class="px-2 m-0">
+          <% 1.times do %>
+          <i class="fas fa-male"></i>
+          <% end %>
+        </p>
+        <span>0 - 3 people</span>
+      </div>
+      <div class="m-0 d-flex justify-content-around align-items-center">
+        <p class="px-2 m-0">
+          <% 2.times do %>
+          <i class="fas fa-male"></i>
+          <% end %>
+        </p>
+        <span>4 - 8 people</span>
+      </div>
+      <div class="m-0 d-flex justify-content-around align-items-center">
+        <p class="px-2 m-0">
+          <% 3.times do %>
+          <i class="fas fa-male"></i>
+          <% end %>
+        </p>
+        <span>>8 people</span>
+      </div>
+    </div>
+  </div>
 </div>
 <!---
 <% unless @lat_lng %>
