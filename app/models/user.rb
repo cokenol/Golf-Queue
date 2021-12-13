@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_one_attached :photo
   acts_as_favoritor
   acts_as_voter
+  has_friendship
 
   def fbsignup
   end
