@@ -1,14 +1,26 @@
 <div data-controller="home-animation">
   <div>
     <div class="navbar navbar-expand-sm navbar-dark navbar-lewagon <%= (current_page?(root_path) && current_user.nil?) ? "animate-initial" : "" %>"  data-home-animation-target="navbar">
-      <%= link_to root_path, class: "navbar-brand" do %>
-        <h2 class="d-flex align-items-center logo-text">
-          <div class="golf-logo">Golf</div>
-          <div class="queue-logo">Queue</div>
-        </h2>
-        <p class="tagline-outer">
-          Got long queue ah?
-        </p>
+      <% if @golfrange.present? && current_page?(golf_range_path(@golfrange))  %>
+        <%= link_to root_path, class: "navbar-brand w-auto" do %>
+          <h2 class="d-flex align-items-center logo-text">
+            <div class="golf-logo">G</div>
+            <div class="queue-logo">Q</div>
+          </h2>
+        <% end %>
+        <div class="golfrange-text"> <!--style="font-size:2rem; color: white;"-->
+          <h2 style="color: white;"><%= @golfrange.name %></h2>
+        </div>
+      <% else %>
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <h2 class="d-flex align-items-center logo-text">
+            <div class="golf-logo">Golf</div>
+            <div class="queue-logo">Queue</div>
+          </h2>
+          <p class="tagline-outer">
+            Got long queue ah?
+          </p>
+        <% end %>
       <% end %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,9 +33,9 @@
             <li class="nav-item active">
               <%= link_to "Home", "#", class: "nav-link" %>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <%= link_to "Messages", "#", class: "nav-link" %>
-            </li>
+            </li> -->
             <li class="nav-item dropdown">
 
               <% if current_user.photo.attached? %>
