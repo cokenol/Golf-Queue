@@ -19,9 +19,17 @@ class QueueWallsController < ApplicationController
   end
 
   def create
-    @tempfile = params["queue_wall"]["photo"].tempfile.path
-    data = Exif::Data.new(File.open(@tempfile))
     @queue = QueueWall.new(queue_wall_params)
+    @tempfile = params["queue_wall"]["photo"].tempfile.path
+
+    begin
+      data = Exif::Data.new(File.open(@tempfile))
+    rescue Exif::NotReadable
+      flash[:alert] = "Photo uploaded must have EXIF data. Try taking a photo from your phone."
+      render :new, level: @queue.level
+      return @queue
+    end
+
     if data.ifds[:exif][:date_time_original].nil?
       flash[:alert] = "Photo uploaded must have date-time data. Try taking a photo from your phone."
       # raise
