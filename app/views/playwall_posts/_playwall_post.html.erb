@@ -14,6 +14,11 @@
         <% if playwall_post.photos.attached? %>
           <% if playwall_post.photos.count > 1 %>
             <div id="<%= playwall_post.id %>photos" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <% playwall_post.photos.each.with_index do |photo, index| %>
+                <li data-target="#<%= playwall_post.id %>photos" data-slide-to="<%= index %>" class="<%= index.zero? ? "active" : "" %>"></li>
+              <% end %>
+            </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
@@ -24,7 +29,6 @@
                 </div>
                 <% end %>
             </div>
-
               <button class="carousel-control-prev" type="button" data-target="#<%= playwall_post.id %>photos" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -34,7 +38,7 @@
                 <span class="sr-only">Next</span>
               </button>
             </div>
-            <% else %>
+          <% else %>
             <div class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -42,7 +46,7 @@
                 </div>
               </div>
             </div>
-      <% end %>
+          <% end %>
     <% end %>
   <div class="card-trip-infos pt-2" data-controller="like-button">
     <h2>
@@ -83,7 +87,11 @@
 
   </div>
   <div class="card-trip-infos">
+    <% if playwall_post.comments.count.zero?  %>
+      <%= link_to "Add a comment", playwall_post_comments_path(playwall_post)  %>
+    <% else %>
       <%= link_to "View all #{playwall_post.comments.count} comments", playwall_post_comments_path(playwall_post)  %>
+    <% end %>
   </div>
   <div class="card-trip-infos pt-3">
     <p class="text-muted"><i class="far fa-clock"></i> posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
