@@ -13,8 +13,15 @@ class FriendlistsController < ApplicationController
   # def add_friend
   # end
 
-  # def block_friend
-  # end
+  def block_friend
+    @friend = User.find(params[:id])
+    redirect_to friends_path if current_user.block_friend(@friend)
+  end
+
+  def unblock_friend
+    @friend = User.find(params[:id])
+    redirect_to friends_path if current_user.unblock_friend(@friend)
+  end
 
   def delete_friend
     @friend = User.find(params[:id])

@@ -1,9 +1,12 @@
 <div class="container">
   <h2>My Friends List</h2>
-  <% current_user.friends.each do |friend| %>
-    <div class="card-product">
 
-      <% if friend.image.present? %>
+  <% if current_user.friends.count == 0 %>
+    <h3>You got no friends, try adding some!</h3>
+  <% else %>
+    <% current_user.friends.each do |friend| %>
+      <div class="card-product">
+      <% if @friend.image.present? %>
         <%= image_tag friend.image %>
       <% else %>
         <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
@@ -18,13 +21,39 @@
         <% end %>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <%= link_to "Remove Friend", delete_friend_path(friend), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %>
-          <%= link_to "Block Friend", dashboard_path, class: "dropdown-item" %>
+          <%= link_to "Block Friend", block_friend_path(friend), class: "dropdown-item text-danger",  method: :post, data: { confirm: "Blocking will remove them. Are you sure?" } %>
         </div>
       </div>
+</div>
+    <% end %>
+  <% end %>
+
+  <h3>Blocked List</h3>
+
+  <% if current_user.blocked_friends.count == 0 %>
+    <h3>Looks like you got no enemies here, keep up the good vibes!</h3>
+  <% else %>
+    <% current_user.blocked_friends.each do |friend| %>
+      <div class="card-product">
+      <% if friend.image.present? %>
+        <%= image_tag friend.image %>
+      <% else %>
+        <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+      <% end %>
+      <div class="card-product-infos">
+        <h2>@<%= friend.username %></h2>
+        <p>Something about the friend here</p>
       </div>
-
-
-
+      <div>
+      <%= link_to "", class: "dropdown", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false  do %>
+        <i class="fas fa-ellipsis-h text-dark"></i>
+        <% end %>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <%= link_to "Unblock Friend", unblock_friend_path(friend), class: "dropdown-item text-danger",  method: :post, data: { confirm: "Are you sure?" } %>
+        </div>
+      </div>
+</div>
+    <% end %>
   <% end %>
 
 </div>

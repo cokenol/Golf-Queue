@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   delete '/friends/:id', to: 'friendlists#delete_friend', as: 'delete_friend'
+  post '/friends/block/:id', to: 'friendlists#block_friend', as: 'block_friend'
+  post '/friends/unblock/:id', to: 'friendlists#unblock_friend', as: 'unblock_friend'
   get '/friends', to: 'friendlists#friends_list', as: 'friends'
   root to: 'queue_walls#index'
 
