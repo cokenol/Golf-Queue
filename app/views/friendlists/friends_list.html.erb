@@ -1,32 +1,31 @@
 <div class="container">
   <h2>My Friends List</h2>
 
+    <%= link_to "Search for Golfers", search_friends_path, class: "btn btn-primary mb-2"  %>
   <% if current_user.friends.count == 0 %>
     <h6>You got no friends, try adding some!</h6>
-
-
   <% else %>
     <% current_user.friends.each do |friend| %>
-      <div class="card-product">
-      <% if @friend.image.present? %>
-        <%= image_tag friend.image %>
-      <% else %>
-        <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
-      <% end %>
-      <div class="card-product-infos">
-        <h2>@<%= friend.username %></h2>
-        <p>Something about the friend here</p>
-      </div>
-      <div>
-      <%= link_to "", class: "dropdown", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false  do %>
-        <i class="fas fa-ellipsis-h text-dark"></i>
+      <div class="card-product mb-3">
+        <% if friend.image.present? %>
+          <%= image_tag friend.image %>
+        <% else %>
+          <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
         <% end %>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <%= link_to "Remove Friend", delete_friend_path(friend), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %>
-          <%= link_to "Block Friend", block_friend_path(friend), class: "dropdown-item text-danger",  method: :post, data: { confirm: "Blocking will remove them. Are you sure?" } %>
+        <div class="card-product-infos flex-grow-1">
+          <h2>@<%= friend.username %></h2>
+          <p>I love golfing!</p>
+        </div>
+        <div class="card-product-infos pr-2">
+        <%= link_to "", class: "dropdown", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false  do %>
+          <i class="fas fa-ellipsis-h text-dark"></i>
+          <% end %>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <%= link_to "Remove Friend", delete_friend_path(friend), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+              <%= link_to "Block Friend", block_friend_path(friend), class: "dropdown-item text-danger",  method: :post, data: { confirm: "Blocking will remove them. Are you sure?" } %>
+            </div>
         </div>
       </div>
-</div>
     <% end %>
   <% end %>
 
@@ -42,7 +41,7 @@
       <% else %>
         <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
       <% end %>
-      <div class="card-product-infos">
+      <div class="card-product-infos flex-grow-1">
         <h2>@<%= friend.username %></h2>
         <p>Something about the friend here</p>
       </div>
@@ -57,5 +56,57 @@
 </div>
     <% end %>
   <% end %>
+
+
+  <% if current_user.requested_friends.present? %>
+  <h4>Pending Request</h4>
+
+    <% current_user.requested_friends.each do |user| %>
+
+
+    <div class="card-product mt-2">
+      <% if user.image.present? %>
+        <%= image_tag user.image %>
+      <% else %>
+        <%= cl_image_tag user.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+      <% end %>
+      <div class="card-product-infos flex-grow-1">
+        <h2>@<%= user.username %></h2>
+        <p>This golfer wants to be your friend!</p>
+      </div>
+      <div>
+
+          <%= link_to accept_friend_path(user), class: "text-success" do %>
+            <i class="fas fa-check"></i>
+          <% end %>
+          <%= link_to decline_friend_path(user), class: "text-danger" do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+
+    <% if current_user.pending_friends.present? %>
+  <h4>Pending Request</h4>
+
+    <% current_user.pending_friends.each do |user| %>
+
+
+    <div class="card-product mt-2">
+      <% if user.image.present? %>
+        <%= image_tag user.image %>
+      <% else %>
+        <%= cl_image_tag user.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+      <% end %>
+      <div class="card-product-infos flex-grow-1">
+        <h2>@<%= user.username %></h2>
+        <p>Waiting for this Golfer to accept your request</p>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+
 
 </div>

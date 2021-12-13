@@ -12,6 +12,13 @@ class User < ApplicationRecord
   acts_as_voter
   has_friendship
 
+  include PgSearch::Model
+  pg_search_scope :search_by_username_email,
+    against: [ :username, :email ],
+    using: {
+      tsearch: { prefix: true } # <-- now `superman batm` will return something!
+    }
+
   def fbsignup
   end
 

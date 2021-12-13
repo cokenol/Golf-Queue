@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   post '/friends/block/:id', to: 'friendlists#block_friend', as: 'block_friend'
   post '/friends/unblock/:id', to: 'friendlists#unblock_friend', as: 'unblock_friend'
   get '/friends', to: 'friendlists#friends_list', as: 'friends'
+  get '/friends/search', to: 'friendlists#search_friend', as: 'search_friends'
+  get '/friends/add/:id', to: 'friendlists#add_friend', as: 'add_friend'
+  get '/friends/accept/:id', to: 'friendlists#accept_friend', as: 'accept_friend'
+  get '/friends/decline/:id', to: 'friendlists#decline_friend', as: 'decline_friend'
   root to: 'queue_walls#index'
 
   resources :golf_ranges do
