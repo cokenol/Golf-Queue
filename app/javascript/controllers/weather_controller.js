@@ -7,7 +7,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = [];
+  static targets = [''];
 
   initialize() {
     // Once, when the controller is first instantiated
@@ -24,6 +24,10 @@ export default class extends Controller {
         location.reload();
       });
     }
+  }
+
+  allow() {
+    console.log("clicked location");
   }
 
   // disconnect() {
