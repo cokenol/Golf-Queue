@@ -23,9 +23,11 @@ Rails.application.routes.draw do
     resources :play_wall_reports, only: %i[new create]
     member do
       post 'toggle_favorite', to: "playwall_posts#toggle_favorite"
+      # get 'userplaywall', to: "playwall_posts#userplaywall"
     end
-  end
 
+  end
+  get 'userpost', to: 'pages#userpost'
   resources :golf_ranges, only: %i[show]
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
