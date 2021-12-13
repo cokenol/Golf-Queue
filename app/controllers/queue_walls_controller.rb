@@ -22,15 +22,25 @@ class QueueWallsController < ApplicationController
     @tempfile = params["queue_wall"]["photo"].tempfile.path
     data = Exif::Data.new(File.open(@tempfile))
     @queue = QueueWall.new(queue_wall_params)
-    image_date = "#{data.ifds[:exif][:date_time_original].split.first.gsub(":","/")} #{data.ifds[:exif][:date_time_original].split.last}"
-    @queue.user = current_user
-    @queue.image_time = DateTime.parse(image_date)
-    @queue.golf_range = @golfrange
-    # raise
-    if @queue.save
-      redirect_to @golfrange
-    else
+    if data.ifds[:exif][:date_time_original].nil?
+      flash[:alert] = "Photo uploaded must have date-time data. Try taking a photo from your phone."
+      # raise
       render :new, level: @queue.level
+    else
+      image_date = "#{data.ifds[:exif][:date_time_original].split.first.gsub(":","/")} #{data.ifds[:exif][:date_time_original].split.last}"
+      @queue.user = current_user
+      @queue.image_time = DateTime.parse(image_date)
+      @queue.golf_range = @golfrange
+
+      # check that queue instance is valid to save AND image exif time is 15 mins within current_time.
+      if (((Time.now.utc - @queue.image_time) / 60) <= 15) && @queue.save
+        redirect_to @golfrange
+      else
+        # raise
+        flash[:alert] = "Invalid input, Photo taken must be 15 minutes within posting time."
+        render :new, level: @queue.level
+        # render :new, level: @queue.level
+      end
     end
   end
 

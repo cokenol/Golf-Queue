@@ -75,14 +75,16 @@
     <h2>@<%= queue_wall.user.username %></h2>
   </div>
   <div class="card-trip-infos">
+    <p><i class="far fa-clock"></i> posted <%= time_ago_in_words(queue_wall.created_at).gsub('about ', '') %> ago</p>
+    <!---
     <% if queue_wall.image_time.present? %>
       <p class="text-muted"><i class="fas fa-camera"></i> taken <%= time_ago_in_words(queue_wall.image_time).gsub('about ', '') %> ago<br>
       <i class="far fa-clock"></i> posted <%= time_ago_in_words(queue_wall.created_at).gsub('about ', '') %> ago</p>
     <% else %>
       <p class="text-muted"><i class="far fa-clock"></i>posted <%= time_ago_in_words(queue_wall.created_at).gsub('about ', '') %> ago</p>
-    <% end %>
+    <% end %> --->
 
-    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level), class: "btn btn-primary" %>
+    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level), class: "btn btn-primary mb-2" %>
   </div>
 
 </div>

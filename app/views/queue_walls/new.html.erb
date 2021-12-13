@@ -1,6 +1,7 @@
 <div class="container">
   <% @queue.level = params[:level] %>
   <h1 class="text-center">Update queue for <%= @golfrange.name %> @ <%= @queue.level  %></h1>
+  <% @queue.level = params["queue_wall"]["level"] if @queue.level.nil? %>
   <div data-controller='queue-update'>
     <%= simple_form_for [@golfrange, @queue] do |f|  %>
       <%= f.input :level, as: :hidden  %>
