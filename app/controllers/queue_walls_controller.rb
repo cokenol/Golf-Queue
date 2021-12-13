@@ -7,6 +7,18 @@ class QueueWallsController < ApplicationController
   before_action :find_golfrange, only: %i[new create]
 
   def index
+    q_num = (0..30).to_a
+    @queue_count = {}
+    q_num.map do |n|
+      case n
+      when 0..3
+        @queue_count[n] = 1
+      when 4..8
+        @queue_count[n] = 2
+      when 9..30
+        @queue_count[n] = 3
+      end
+    end
     @queues = QueueWall.all
     @ranges = GolfRange.all
     @weather = weather_status(@ranges)
