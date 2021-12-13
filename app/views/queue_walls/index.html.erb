@@ -8,7 +8,7 @@
             <h4><%= q.name %></h4>
           </div>
           <div class="weather-status m-0">
-            <h4 class="px-1"><%= image_tag "http://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
+            <h4 class="px-1"><%= image_tag "https://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
           </div>
 
         </div>
@@ -24,7 +24,7 @@
             <p class="px-3"; style="margin: 0;">Pax in queue:</p>
             <div class="queue-status d-flex justify-content-between">
               <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
-                <div class="level-queue d-flex flex-column px-3 align-items-center">
+                <div class="level-queue d-flex flex-column px-1 align-items-center">
                   <small><%= "#{q.level}"%></small>
                   <p class="m-0">
                     <% (@queue_count[q.queue_length]).times do %>
@@ -46,6 +46,3 @@
   <%= javascript_include_tag "currentcoords.js" %>
 <% end %>
 --->
-<button id="location" data-controller="location" data-action="click->location#allow" class="btn btn-outline-primary bg-light" style="position: fixed; bottom: 1rem; right: 1rem; border-radius: 50%;">
-  <i class="fas fa-location-arrow"></i>
-</button>
