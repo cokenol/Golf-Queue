@@ -1,0 +1,7 @@
+<div class="container">
+<h1>Welcome</h1>
+<% current_user.playwall_posts.each do |playwallpost| %>
+  <%= playwallpost.caption %>
+<% end %>
+
+</div>
