@@ -9,7 +9,7 @@
           </h2>
         <% end %>
         <div class="golfrange-text"> <!--style="font-size:2rem; color: white;"-->
-          <h2 style="color: white;"><%= @golfrange.name %></h2>
+          <h2 style="color: white;"><%= @golfrange.name.first(12) %></h2>
         </div>
       <% else %>
         <%= link_to root_path, class: "navbar-brand" do %>
