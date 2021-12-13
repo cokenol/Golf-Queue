@@ -1,8 +1,8 @@
 class FriendlistsController < ApplicationController
   before_action :authenticate_user!
 
-  # def search_friend
-  # end
+  def search_friend
+  end
 
   def friends_list
   end

@@ -2,7 +2,9 @@
   <h2>My Friends List</h2>
 
   <% if current_user.friends.count == 0 %>
-    <h3>You got no friends, try adding some!</h3>
+    <h6>You got no friends, try adding some!</h6>
+
+
   <% else %>
     <% current_user.friends.each do |friend| %>
       <div class="card-product">
@@ -28,10 +30,10 @@
     <% end %>
   <% end %>
 
-  <h3>Blocked List</h3>
+  <h4>Blocked List</h4>
 
   <% if current_user.blocked_friends.count == 0 %>
-    <h3>Looks like you got no enemies here, keep up the good vibes!</h3>
+    <h6>Looks like you got no enemies here, keep up the good vibes!</h6>
   <% else %>
     <% current_user.blocked_friends.each do |friend| %>
       <div class="card-product">
