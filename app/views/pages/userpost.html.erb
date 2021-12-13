@@ -1,6 +1,6 @@
 <div class="container">
 
-<% current_user.playwall_posts.each do |playwall_post| %>
+<% current_user.playwall_posts.by_latest.each do |playwall_post| %>
     <div class="card-trip">
           <div class="card-trip-infos">
             <h2 class="pt-2 d-flex align-items-center">
@@ -112,3 +112,5 @@
 <% end %>
 
 </div>
+
+<%= render 'shared/btm-navbar' %>
