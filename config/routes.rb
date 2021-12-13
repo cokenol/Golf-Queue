@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  delete '/friends/:id', to: 'friendlists#delete_friend', as: 'delete_friend'
+  get '/friends', to: 'friendlists#friends_list', as: 'friends'
   root to: 'queue_walls#index'
 
   resources :golf_ranges do
@@ -22,6 +24,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
-  get '/friends', to: 'friendlists#friends_list', as: 'friends'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

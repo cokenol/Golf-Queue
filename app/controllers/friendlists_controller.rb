@@ -16,8 +16,10 @@ class FriendlistsController < ApplicationController
   # def block_friend
   # end
 
-  # def delete_friend
-  # end
+  def delete_friend
+    @friend = User.find(params[:id])
+    redirect_to friends_path if current_user.remove_friend(@friend)
+  end
 
   # def pending_friend
   # end
