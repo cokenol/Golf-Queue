@@ -6,6 +6,10 @@
   top: 0;
   width: 100%;
   z-index: 50;
+  .dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
 }
 
 p.tagline-outer {
