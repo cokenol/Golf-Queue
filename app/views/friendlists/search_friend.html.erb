@@ -26,6 +26,10 @@
       <% if current_user == user %>
       <% elsif current_user.friends.include?(user) %>
         <i class="fas fa-user-friends text-primary"></i>
+      <% elsif current_user.pending_friends.include?(user) || current_user.requested_friends.include?(user) %>
+        <i class="fas fa-user-clock text-info"></i>
+      <% elsif current_user.blocked_friends.include?(user) %>
+        <i class="fas fa-user-slash text-danger"></i>
       <% else %>
         <%= link_to add_friend_path(user), class: "text-success" do %>
           <i class="fas fa-user-plus"></i>
