@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: #05386b;
+  background: #2f4b32;
   min-height: 70px;
   position: fixed;
   top: 0;
@@ -35,9 +35,11 @@ h2.logo-text{
 .navbar-lewagon h2 {
   color: yellow;
 
+
   .golf-logo {
     transition: 300ms ease-out;
-    color: #edf5e1;
+    color: white;
+    font: bold
   }
 }
 
