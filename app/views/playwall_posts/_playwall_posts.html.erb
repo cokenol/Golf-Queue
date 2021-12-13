@@ -79,14 +79,28 @@
       <% end %>
       <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
       <div class="dropdown">
+
         <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown"></button>
             <div class="dropdown-menu dropdown-menu-right ">
-              <%= link_to "Submit Violation", new_playwall_post_play_wall_report_path(playwall_post)%>
+      <% if current_user == playwall_post.user %>
+      <% elsif current_user.friends.include?(playwall_post.user) %>
+              <span class="dropdown-item text-primary"><i class="fas fa-user-friends"></i> Friend</span>
+      <% elsif current_user.pending_friends.include?(playwall_post.user) || current_user.requested_friends.include?(playwall_post.user) %>
+              <span class="dropdown-item text-info"><i class="fas fa-user-clock"></i> Pending Friend Request</span>
+      <% else %>
+              <%= link_to add_friend_path(playwall_post.user), class: "text-success dropdown-item" do %>
+                <i class="fas fa-user-plus"></i><span> Add User</span>
+              <% end %>
+      <% end %>
+              <%= link_to new_playwall_post_play_wall_report_path(playwall_post), class: "text-danger dropdown-item" do %>
+                <i class="fas fa-exclamation-circle"></i><span> Submit Violation</span>
+              <% end %>
             </div>
+
       </div>
     </div>
     <div class="card-trip-infos pt-3">
-      <h6><%= playwall_post.caption %></h6>
+      <h6><b><%= playwall_post.user.username %></b> <%= playwall_post.caption %></h6>
     </div>
       <div class="card-trip-infos pt-3">
 
