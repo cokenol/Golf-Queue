@@ -6,9 +6,10 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @status = StatusUpdate.all.by_latest
+    @friendstatus = @status.select { |update| current_user.friends.include?(update.user) }
   end
 
   def userpost
-
   end
 end

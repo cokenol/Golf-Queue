@@ -1,3 +1,96 @@
-<div class="container">
+<div class="container" data-controller="tabs">
+  <h1 class="border-bottom">Hello, <%= current_user.username %>!</h1>
+  <ul class="list-inline tabs-underlined d-flex justify-content-between">
+  <li>
+    <a href="#" class="tab-underlined active" data-tabs-target="status" data-action="click->tabs#statustab">Status</a>
+  </li>
+  <li>
+    <a href="#" class="tab-underlined" data-tabs-target="friend" data-action="click->tabs#friendtab">Friend Lists</a>
+  </li>
+  <li>
+    <a href="#" class="tab-underlined" data-tabs-target="stats" data-action="click->tabs#statstab">Stats</a>
+  </li>
+</ul>
+
+    <div class="" data-tabs-target="statuscontent">
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Click to post updates
+              </button>
+            </h2>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <%= simple_form_for StatusUpdate.new, url: create_status_path, wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
+              I am going to<%= f.association :golf_range, as: :select%>
+              from
+              <%= f.input :start_date, as: :date, label: false, html5: true %>
+              <% Time.use_zone("Asia/Singapore") do%>
+              <%= f.input :starttime, as: :time, label: false, minute_step: 30, input_html: {value: "19:30"} %>
+              to<%= f.input :endtime, as: :time, label: false, minute_step: 30 %>
+              <% end %>
+              <br><%= f.submit "Post Update!", class: "btn btn-success" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="mt-2">Your Updates</h4>
+      <% current_user.status_updates.by_latest.each do |status| %>
+      <div class="notification">
+        <% if status.user.photo.attached? %>
+            <%= cl_image_tag status.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar-large" %>
+          <% elsif status.user.image.present? %>
+            <%= image_tag status.user.image , class: "avatar-large" %>
+          <% else %>
+            <i class="far fa-user-circle avatar-large fa-2x text-black"></i>
+          <% end %>
+        <div class="notification-content">
+          <p><small>@<%=status.user.username %></small></p>
+          <p>I am going to <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.localtime.strftime("%I:%M%p") %> to <%= status.end_time.localtime.strftime("%I:%M%p")  %>!</p>
+        </div>
+
+        <div class="notification-actions">
+          <%= link_to delete_status_path(status), method: :delete, data: { confirm: "Are you sure?" } do %>
+            Delete <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+      <h4 class="mt-2">Your Friends Updates</h4>
+
+
+        <% @friendstatus.each do |friend| %>
+          <div class="notification">
+            <% if friend.user.photo.attached? %>
+                <%= cl_image_tag friend.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar-large" %>
+              <% elsif friend.user.image.present? %>
+                <%= image_tag friend.user.image , class: "avatar-large" %>
+              <% else %>
+                <i class="far fa-user-circle avatar-large fa-2x text-black"></i>
+              <% end %>
+            <div class="notification-content">
+              <p><small>@<%=friend.user.username %></small></p>
+              <p>I am going to <strong><%= friend.golf_range.name %></strong> on <%= friend.start_time.strftime("%d %b %y") %> from <%= friend.start_time.localtime.strftime("%I:%M%p") %> to <%= friend.end_time.localtime.strftime("%I:%M%p")  %>!</p>
+            </div>
+          </div>
+        <% end %>
+
+
+    </div>
+
+    <div class="d-none" data-tabs-target="friendcontent">
+      <%= render "friendlists/friends_list" %>
+    </div>
+
+    <div class="d-none" data-tabs-target="statscontent">
+    stats
+    </div>
+
 
 </div>

@@ -143,6 +143,17 @@ ActiveRecord::Schema.define(version: 2021_12_14_071748) do
     t.index ["user_id"], name: "index_queue_walls_on_user_id"
   end
 
+  create_table "status_updates", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "golf_range_id", null: false
+    t.index ["golf_range_id"], name: "index_status_updates_on_golf_range_id"
+    t.index ["user_id"], name: "index_status_updates_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -186,4 +197,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_071748) do
   add_foreign_key "queue_wall_reports", "queue_walls"
   add_foreign_key "queue_walls", "golf_ranges"
   add_foreign_key "queue_walls", "users"
+  add_foreign_key "status_updates", "golf_ranges"
+  add_foreign_key "status_updates", "users"
 end
