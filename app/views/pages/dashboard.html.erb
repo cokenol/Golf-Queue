@@ -43,7 +43,13 @@
 
       <% current_user.status_updates.by_latest.each do |status| %>
       <div class="notification">
-        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+        <% if status.user.photo.attached? %>
+            <%= cl_image_tag status.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar-large" %>
+          <% elsif status.user.image.present? %>
+            <%= image_tag status.user.image , class: "avatar-large" %>
+          <% else %>
+            <i class="far fa-user-circle avatar-large fa-2x text-black"></i>
+          <% end %>
         <div class="notification-content">
           <p><small>@<%=status.user.username %></small></p>
           <p>I am going to <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.strftime("%I:%M%p") %> to <%= status.end_time.strftime("%I:%M%p")  %>!</p>
@@ -55,6 +61,26 @@
         </div>
       </div>
       <% end %>
+
+      <h4 class="mt-2">Your Friends Updates</h4>
+
+
+        <% @friendstatus.each do |friend| %>
+          <div class="notification">
+            <% if friend.user.photo.attached? %>
+                <%= cl_image_tag friend.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar-large" %>
+              <% elsif friend.user.image.present? %>
+                <%= image_tag friend.user.image , class: "avatar-large" %>
+              <% else %>
+                <i class="far fa-user-circle avatar-large fa-2x text-black"></i>
+              <% end %>
+            <div class="notification-content">
+              <p><small>@<%=friend.user.username %></small></p>
+              <p>I am going to <strong><%= friend.golf_range.name %></strong> on <%= friend.start_time.strftime("%d %b %y") %> from <%= friend.start_time.strftime("%I:%M%p") %> to <%= friend.end_time.strftime("%I:%M%p")  %>!</p>
+            </div>
+          </div>
+        <% end %>
+
 
     </div>
 
