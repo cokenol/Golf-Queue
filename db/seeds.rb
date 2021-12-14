@@ -20,13 +20,15 @@ address = ["80 Rhu Cross, 01, Singapore 437437",
            "60 Fairways Dr., Singapore 286966",
            "Bukit Batok West Avenue 7 #01-08, Bukit Batok Rd",
            "60 Punggol E, Singapore 828825",
-           "Upper Seletar Reservoir, Mandai Rd Track 7, 779384"]
+           "Upper Seletar Reservoir, Mandai Rd Track 7, 779384",
+           "29A Cuppage Road #02-00 Cuppage Terrace, 229456"]
 
 levels = { "Marina Bay" => %w[L1 L2 L3],
            "Champions" => %w[L1 L2],
            "Bukit Batok" => %w[L1 L2 L3],
            "Punggol Par Range" => %w[L1 L2],
-           "Mandai" => %w[L1 L2] }
+           "Mandai" => %w[L1 L2],
+           "Ravel" => "" }
 
 # photos_image_id = { "Marina Bay" => "range_mujard",
 #                     "Champions" => "ChampionsBukitTimah-010_pmuqmc",
@@ -38,13 +40,15 @@ photos_url = { "Marina Bay" => "https://res.cloudinary.com/din6svi45/image/uploa
                     "Champions" => "https://res.cloudinary.com/din6svi45/image/upload/v1638788166/production/ChampionsBukitTimah-010_pmuqmc.jpg",
                     "Bukit Batok" => "https://res.cloudinary.com/din6svi45/image/upload/v1638787657/production/bukitBatok_gfbmyn.jpg",
                     "Punggol Par Range" => "https://res.cloudinary.com/din6svi45/image/upload/v1638788181/production/Punggol.jpg",
-                    "Mandai" => "https://res.cloudinary.com/din6svi45/image/upload/v1638787728/production/Mandai_qryana.jpg" }
+                    "Mandai" => "https://res.cloudinary.com/din6svi45/image/upload/v1638787728/production/Mandai_qryana.jpg",
+                    "Ravel" => "https://res.cloudinary.com/din6svi45/image/upload/v1639445866/production/ravel_uxxsbg.jpg" }
 
 latlong = [[1.2934890689052803, 103.87154692615685],
            [1.3457101683248145, 103.79643725499207],
            [1.3657171405712318, 103.74844451081523],
            [1.3957574633567735, 103.91756995499189],
-           [1.400995085937511, 103.80911723965048]]
+           [1.400995085937511, 103.80911723965048],
+           [1.3019027805625618, 103.84027117035764]]
 
 
 20.times do
@@ -69,15 +73,17 @@ name.each_with_index do |n, index|
   puts "Seeding golf-range data done. 👌"
   puts "Seeding QueueWall Data #{index + 1}🚀"
 
-  levels[golf.name].each do |v|
-    queue = QueueWall.new(
-      golf_range_id: GolfRange.find_by_name(golf.name).id,
-      user_id: User.all.sample.id,
-      level: v,
-      queue_length: rand(0..23))
-    puts "Creating #{queue}"
+  if levels.present?
+    levels[golf.name].each do |v|
+      queue = QueueWall.new(
+        golf_range_id: GolfRange.find_by_name(golf.name).id,
+        user_id: User.all.sample.id,
+        level: v,
+        queue_length: rand(0..23))
+      puts "Creating #{queue}"
 
-    queue.save!
+      queue.save!
+    end
   end
 
 
