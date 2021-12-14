@@ -55,8 +55,9 @@
         </div>
 
         <div class="notification-actions">
-          <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
-          <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+          <%= link_to delete_status_path(status), method: :delete, data: { confirm: "Are you sure?" } do %>
+            Delete <i class="far fa-trash-alt"></i>
+          <% end %>
         </div>
       </div>
       <% end %>
@@ -90,5 +91,6 @@
     <div class="d-none" data-tabs-target="statscontent">
     stats
     </div>
+
 
 </div>

@@ -21,16 +21,10 @@ class StatusUpdatesController < ApplicationController
     @status = StatusUpdate.new
   end
 
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-  end
 
   def delete
+    @status = StatusUpdate.find(params[:id])
+    redirect_to request.referer if @status.destroy
   end
 
   private
