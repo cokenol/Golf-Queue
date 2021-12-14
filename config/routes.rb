@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :golf_ranges, only: %i[show]
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  get '/notifications/mark_read', to: 'notifications#mark_read'
   get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
