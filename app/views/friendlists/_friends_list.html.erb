@@ -16,7 +16,7 @@
           <% status = friend.status_updates.by_latest.first %>
 
             <% if Time.now > status.start_time && Time.now < status.end_time %>
-              <p>is at <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.localtime.strftime("%I:%M%p") %> to <%= status.end_time.localtime.strftime("%I:%M%p")  %>!</p>
+              <p>is at <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p") %> to <%= status.end_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p")  %>!</p>
             <% else %>
               <p>Waiting to tee off!</p>
             <% end %>
@@ -54,7 +54,7 @@
         <h2>@<%= friend.username %></h2>
           <% if friend.status_updates.present? %>
           <% status = friend.status_updates.by_latest.first %>
-          <p>is at <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.localtime.strftime("%I:%M%p") %> to <%= status.end_time.localtime.strftime("%I:%M%p")  %>!</p>
+          <p>is at <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p") %> to <%= status.end_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p")  %>!</p>
           <% else %>
           <p>Waiting to tee off!</p>
           <% end %>
