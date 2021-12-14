@@ -32,7 +32,7 @@
           <% if user_signed_in? %>
             <li class="nav-item active d-flex align-items-center">
               <%= link_to "Notifications", notifications_path, class: "nav-link" %>
-              <div class="badges"><%= current_user.notifications.unread.count %></div>
+              <div class="<%= current_user.notifications.unread.count.nil? ? "" : "badges" %>"><%= current_user.notifications.unread.count %></div>
             </li>
             <li class="nav-item dropdown">
 

@@ -1,6 +1,6 @@
-<div class="card p-2 d-inline-block w-100 mb-1">
-  <div class="<%= notification.unread? ? "unread" : ""  %>"></div>
-  <%= notification[:params][:comment].user.username %> <%= link_to 'commented', playwall_post_comments_path(notification[:params][:comment].playwall_post.id)  %> on your <%= link_to 'post', playwall_post_path(notification[:params][:comment].playwall_post)   %> <%= time_ago_in_words(notification.created_at).gsub('about ','') %> ago
+<div class="card p-2 d-inline-block w-100 mb-1" style="font-size: 0.8rem;" data-action='click->notification-read#click'>
+  <div class="<%= notification.unread? ? "unread" : ""  %>" data-target="notification"></div>
+  <%= notification[:params][:comment].user.username %> <%= link_to 'commented', playwall_post_comments_path(notification[:params][:comment].playwall_post.id), data: { action: 'click->notification-read#click' }  %> on your <%= link_to "post: #{notification[:params][:comment].playwall_post.caption.truncate(15)}", playwall_post_path(notification[:params][:comment].playwall_post)   %> <%= time_ago_in_words(notification.created_at).gsub('about ','') %> ago
 </div>
 
 <%# <% notification.mark_as_read! %>
