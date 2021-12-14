@@ -4,19 +4,19 @@
     <div class="queue-color-info">
       <div class="m-0 d-flex justify-content-left align-items-center" style="color: rgba(255,255,0,1);">
         <p class="px-2 m-0">
-          <% 3.times do %>
+          <% 1.times do %>
           <i class="fas fa-male"></i>
           <% end %>
         </p>
-        <span style="color: white;">Latest Info</span>
+        <span style="color: white;">Latest</span>
       </div>
       <div class="m-0 d-flex justify-content-left align-items-center" style="color: rgba(255,255,255,0.4);">
         <p class="px-2 m-0">
-          <% 3.times do %>
+          <% 1.times do %>
           <i class="fas fa-male"></i>
           <% end %>
         </p>
-        <span style="color: white;">Old Info</span>
+        <span style="color: white;">Old</span>
       </div>
     </div>
     <div class="queue-pax-info">
@@ -55,7 +55,7 @@
 
         <div class="d-flex justify-content-between w-100">
           <div class="title">
-            <h4><%= q.name %></h4>
+            <h4><%= q.name.first(11) %></h4>
           </div>
           <div class="weather-status m-0">
             <h4 class="px-1"><%= image_tag "https://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
@@ -73,7 +73,7 @@
           </div>
           <div class="px-3" style="margin-right: 2rem;">
             <% if q.queue_walls.present? %>
-              <p class="px-3"; style="margin: 0;">Pax in queue:</p>
+              <p class="px-3"; style="margin: 0; line-height:1.0;">Pax in queue:</p>
               <div class="queue-status d-flex justify-content-between">
                 <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
                   <div class="level-queue d-flex flex-column px-1 align-items-center">
