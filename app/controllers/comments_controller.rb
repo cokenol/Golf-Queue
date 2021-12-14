@@ -34,6 +34,8 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.playwall_post = @playwall
     redirect_to playwall_post_comments_path if @comment.save
+    notification = CommentNotification.with(comment: @comment)
+    notification.deliver(@comment.playwall_post.user)
   end
 
   private

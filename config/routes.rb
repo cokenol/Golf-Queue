@@ -15,13 +15,14 @@ Rails.application.routes.draw do
   resources :golf_ranges do
     resources :queue_walls, only: %i[new create]
   end
+  resources :notifications, only: %i[index]
   resources :queue_walls, only: %i[index] do
     resource :queue_wall_reports, only: %i[new create]
     member do
       post 'toggle_vote', to: "queue_walls#toggle_votes"
     end
   end
-  resources :playwall_posts, only: %i[index new create] do
+  resources :playwall_posts, only: %i[index new create show] do
     resources :comments, only: %i[index new show create]
     resources :play_wall_reports, only: %i[new create]
     member do

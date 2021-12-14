@@ -1,47 +1,24 @@
 <div class="container card-container">
-  <% @ranges.each_with_index do |q, index|  %>
-    <%= link_to golf_range_path(q) do   %>
-      <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(<%= q.photo_url %>)">
-
-        <div class="d-flex justify-content-between w-100">
-          <div class="title">
-            <h4><%= q.name %></h4>
-          </div>
-          <div class="weather-status m-0">
-            <h4 class="px-1"><%= image_tag "https://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
-          </div>
-
-        </div>
-        <div class="weather-and-traffic m-0 d-flex w-100 align-items-end">
-          <div class="traffic-status mb-0" data-controller="weather">
-            <% if @traffic.present? %>
-              <h4><i class="fas fa-car"></i><%= ": #{@traffic[index]} mins" %></h4>
-            <% else %>
-              <h4><i class="fas fa-car"></i><%= ": -" %></h4>
-            <% end %>
-          </div>
-          <div class="px-3" style="margin-right: 2rem;">
-            <p class="px-3"; style="margin: 0;">Pax in queue:</p>
-            <div class="queue-status d-flex justify-content-between">
-              <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
-                <div class="level-queue d-flex flex-column px-1 align-items-center">
-                  <small><%= "#{q.level}"%></small>
-                  <p class="m-0">
-                    <% (@queue_count[q.queue_length]).times do %>
-                    <i class="fas fa-male"></i>
-                    <% end %>
-                  </p>
-                  <!--<p class="m-0"><%= "#{q.queue_length}"%></p>-->
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-  <div class="card-category d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8))">
+  <div class="card-category d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)); height: 90px; margin: 0 auto -0.7rem">
     <h4>Legend:</h4>
+    <div class="queue-color-info">
+      <div class="m-0 d-flex justify-content-left align-items-center" style="color: rgba(255,255,0,1);">
+        <p class="px-2 m-0">
+          <% 3.times do %>
+          <i class="fas fa-male"></i>
+          <% end %>
+        </p>
+        <span style="color: white;">Latest Info</span>
+      </div>
+      <div class="m-0 d-flex justify-content-left align-items-center" style="color: rgba(255,255,255,0.4);">
+        <p class="px-2 m-0">
+          <% 3.times do %>
+          <i class="fas fa-male"></i>
+          <% end %>
+        </p>
+        <span style="color: white;">Old Info</span>
+      </div>
+    </div>
     <div class="queue-pax-info">
       <div class="m-0 d-flex justify-content-around align-items-center">
         <p class="px-2 m-0">
@@ -69,6 +46,49 @@
       </div>
     </div>
   </div>
+  <% @ranges.each_with_index do |q, index|  %>
+    <%= link_to golf_range_path(q) do   %>
+      <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(<%= q.photo_url %>)">
+
+        <div class="d-flex justify-content-between w-100">
+          <div class="title">
+            <h4><%= q.name %></h4>
+          </div>
+          <div class="weather-status m-0">
+            <h4 class="px-1"><%= image_tag "https://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
+          </div>
+
+        </div>
+        <div class="weather-and-traffic m-0 d-flex w-100 align-items-end">
+          <div class="traffic-status mb-0" data-controller="weather">
+            <% if @traffic.present? %>
+              <h4><i class="fas fa-car"></i><%= ": #{@traffic[index]} mins" %></h4>
+            <% else %>
+              <h4><i class="fas fa-car"></i><%= ": -" %></h4>
+            <% end %>
+          </div>
+          <div class="px-3" style="margin-right: 2rem;">
+            <% if q.queue_walls.present? %>
+              <p class="px-3"; style="margin: 0;">Pax in queue:</p>
+              <div class="queue-status d-flex justify-content-between">
+                <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
+                  <div class="level-queue d-flex flex-column px-1 align-items-center">
+                    <small><%= "#{q.level}"%></small>
+                    <p class="m-0" style="color: <%= ((Time.now.utc - q.created_at) <= 1800) ? "rgba(255,255,0,1)" : "rgba(255,255,255,0.4)" %>;">
+                      <% (@queue_count[q.queue_length]).times do %>
+                      <i class="fas fa-male"></i>
+                      <% end %>
+                    </p>
+                    <!--<p class="m-0"><%= "#{q.queue_length}"%></p>-->
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 <!---
 <% unless @lat_lng %>

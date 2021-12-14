@@ -75,6 +75,9 @@ GEM
     acts_as_votable (0.13.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    apnotic (1.7.0)
+      connection_pool (~> 2)
+      net-http2 (>= 0.18.3, < 2)
     autoprefixer-rails (10.2.5.0)
       execjs (< 2.8.0)
     aws_cf_signer (0.1.3)
@@ -99,6 +102,7 @@ GEM
       rest-client
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     devise (4.8.0)
       bcrypt (~> 3.0)
@@ -137,15 +141,25 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     ffi (1.15.4)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
     geocoder (1.7.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
+    http-2 (0.11.0)
+    http (5.0.4)
+      addressable (~> 2.8)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      llhttp-ffi (~> 0.4.0)
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
+    http-form_data (2.3.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.3)
@@ -154,6 +168,9 @@ GEM
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
     loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -171,12 +188,17 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    net-http2 (0.18.4)
+      http-2 (~> 0.11)
     netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.12.5-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
+    noticed (1.5.5)
+      http (>= 4.0.0)
+      rails (>= 5.2.0)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -332,6 +354,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_favoritor
   acts_as_votable
+  apnotic
   autoprefixer-rails (= 10.2.5)
   bootsnap (>= 1.4.4)
   byebug
@@ -346,6 +369,7 @@ DEPENDENCIES
   has_friendship!
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  noticed
   omniauth-facebook
   omniauth-rails_csrf_protection
   pagy
