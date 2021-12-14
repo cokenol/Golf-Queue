@@ -21,20 +21,22 @@
             <% end %>
           </div>
           <div class="px-3" style="margin-right: 2rem;">
-            <p class="px-3"; style="margin: 0;">Pax in queue:</p>
-            <div class="queue-status d-flex justify-content-between">
-              <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
-                <div class="level-queue d-flex flex-column px-1 align-items-center">
-                  <small><%= "#{q.level}"%></small>
-                  <p class="m-0">
-                    <% (@queue_count[q.queue_length]).times do %>
-                    <i class="fas fa-male"></i>
-                    <% end %>
-                  </p>
-                  <!--<p class="m-0"><%= "#{q.queue_length}"%></p>-->
-                </div>
-              <% end %>
-            </div>
+            <% if q.queue_walls.present? %>
+              <p class="px-3"; style="margin: 0;">Pax in queue:</p>
+              <div class="queue-status d-flex justify-content-between">
+                <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
+                  <div class="level-queue d-flex flex-column px-1 align-items-center">
+                    <small><%= "#{q.level}"%></small>
+                    <p class="m-0">
+                      <% (@queue_count[q.queue_length]).times do %>
+                      <i class="fas fa-male"></i>
+                      <% end %>
+                    </p>
+                    <!--<p class="m-0"><%= "#{q.queue_length}"%></p>-->
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
