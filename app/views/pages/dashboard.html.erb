@@ -22,25 +22,31 @@
               </button>
             </h2>
           </div>
-
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
               <%= simple_form_for StatusUpdate.new, url: create_status_path, wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
               I am going to<%= f.association :golf_range, as: :select%>
-              from<%= f.input :start_date, as: :date, label: false, html5: true %>
-              <%= f.input :starttime, as: :time, label: false, minute_step: 30 %>
+              from
+              <%= f.input :start_date, as: :date, label: false, html5: true %>
+              <% Time.use_zone("Asia/Singapore") do%>
+              <%= f.input :starttime, as: :time, label: false, minute_step: 30, input_html: {value: "19:30"} %>
               to<%= f.input :endtime, as: :time, label: false, minute_step: 30 %>
+              <% end %>
               <br><%= f.submit "Post Update!", class: "btn btn-success" %>
               <% end %>
             </div>
           </div>
         </div>
       </div>
+
+      <h4 class="mt-2">Your Updates</h4>
+
+      <% current_user.status_updates.by_latest.each do |status| %>
       <div class="notification">
         <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
         <div class="notification-content">
-          <p><small>@<%= @status.user.username %></small></p>
-          <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit.</p>
+          <p><small>@<%=status.user.username %></small></p>
+          <p>I am going to <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.strftime("%I:%M%p") %> to <%= status.end_time.strftime("%I:%M%p")  %>!</p>
         </div>
 
         <div class="notification-actions">
@@ -48,6 +54,8 @@
           <a href="#">Delete <i class="far fa-trash-alt"></i></a>
         </div>
       </div>
+      <% end %>
+
     </div>
 
     <div class="d-none" data-tabs-target="friendcontent">
