@@ -9,7 +9,30 @@
   .dropdown-menu-right {
     right: 0;
     left: auto;
+  }
+  .badges {
+    border-radius: 2rem;
+    background-color: red;
+    color: aquamarine;
+    padding: 0 0.5rem 0;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.5rem;
+    // line-height: 1.8;
+  }
 }
+
+.unread {
+  width: 0.7rem;
+  height: 0.7rem;
+  background-color: blue;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+  line-height: 0;
 }
 
 p.tagline-outer {

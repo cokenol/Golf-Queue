@@ -1,0 +1,6 @@
+<div class="card p-2 d-inline-block w-100 mb-1">
+  <div class="<%= notification.unread? ? "unread" : ""  %>"></div>
+  <%= notification[:params][:comment].user.username %> <%= link_to 'commented', playwall_post_comments_path(notification[:params][:comment].playwall_post.id)  %> on your <%= link_to 'post', playwall_post_path(notification[:params][:comment].playwall_post)   %> <%= time_ago_in_words(notification.created_at).gsub('about ','') %> ago
+</div>
+
+<%# <% notification.mark_as_read! %>

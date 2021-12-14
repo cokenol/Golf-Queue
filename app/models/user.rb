@@ -11,6 +11,7 @@ class User < ApplicationRecord
   acts_as_favoritor
   acts_as_voter
   has_friendship
+  has_many :notifications, as: :recipient
 
   include PgSearch::Model
   pg_search_scope :search_by_username_email,

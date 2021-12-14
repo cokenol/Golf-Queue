@@ -37,6 +37,10 @@ class PlaywallPostsController < ApplicationController
     end
   end
 
+  def show
+    @playwall = PlaywallPost.find(params[:id])
+  end
+
   def toggle_favorite
     @playwall = PlaywallPost.find(params[:id])
     current_user.favorited?(@playwall) ? current_user.unfavorite(@playwall) : current_user.favorite(@playwall)
