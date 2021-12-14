@@ -32,7 +32,22 @@ class QueueWallsController < ApplicationController
 
   def create
     @queue = QueueWall.new(queue_wall_params)
-    @tempfile = params["queue_wall"]["photo"].tempfile.path
+    begin
+      @tempfile = params["queue_wall"]["photo"].tempfile.path
+    rescue NoMethodError
+      @queue.user = current_user
+      @queue.golf_range = @golfrange
+      if @queue.save
+        redirect_to @golfrange
+      else
+        # raise
+        flash[:alert] = "Invalid input."
+        render :new, level: @queue.level
+        # render :new, level: @queue.level
+      end
+      return @queue
+    end
+
 
     begin
       data = Exif::Data.new(File.open(@tempfile))
