@@ -23,9 +23,17 @@ class PlaywallPostsController < ApplicationController
   def create
     @playwall = PlaywallPost.new(post_params)
     @playwall.user = current_user
-    @playwall.save
-    respond_to do |format|
-      format.json { render json: { status: 'success' }  }
+    puts GolfRange.find(post_params[:golf_range_id]).name
+    puts coords
+    if within_range?(coords, GolfRange.find(post_params[:golf_range_id]))
+      @playwall.save
+      respond_to do |format|
+        format.json { render json: { status: 'success' } }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { status: 'failure' } }
+      end
     end
   end
 
@@ -38,5 +46,14 @@ class PlaywallPostsController < ApplicationController
 
   def post_params
     params.require(:playwall_post).permit(:user_id, :caption, :golf_range_id, photos: [])
+  end
+
+  def coords
+    # [1.3654221803946198, 103.74839086837488]
+    @lat_lng = cookies[:lat_lng].split("|").join(",")
+  end
+
+  def within_range?(coords, range)
+    range.distance_to(coords) <= 2
   end
 end
