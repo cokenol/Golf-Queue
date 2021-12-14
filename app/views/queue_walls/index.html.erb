@@ -48,6 +48,9 @@
   </div>
   <% @ranges.each_with_index do |q, index|  %>
     <%= link_to golf_range_path(q) do   %>
+
+
+
       <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(<%= q.photo_url %>)">
 
         <div class="d-flex justify-content-between w-100">
@@ -59,6 +62,7 @@
           </div>
 
         </div>
+
         <div class="weather-and-traffic m-0 d-flex w-100 align-items-end">
           <div class="traffic-status mb-0" data-controller="weather">
             <% if @traffic.present? %>
@@ -84,7 +88,22 @@
                 <% end %>
               </div>
             <% end %>
+
           </div>
+        <% if current_user.present? %>
+          <% onsite = q.status_updates.select do |e| %>
+          <%  Time.now > e.start_time && Time.now < e.end_time && current_user.friends.include?(e.user) %>
+        <% end %>
+
+          <% if onsite.present? %>
+          <div class="ml-4 text-success">
+                <i class="fas fa-user-friends pr-2"></i><%= onsite.count %>
+          </div>
+
+          <% end %>
+
+
+        <% end %>
         </div>
       </div>
     <% end %>
