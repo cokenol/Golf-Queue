@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :playwall_posts, dependent: :destroy
   has_many :queue_walls, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :status_updates, dependent: :destroy
   has_one_attached :photo
   acts_as_favoritor
   acts_as_voter
