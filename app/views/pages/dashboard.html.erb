@@ -51,7 +51,7 @@
           <% end %>
         <div class="notification-content">
           <p><small>@<%=status.user.username %></small></p>
-          <p>I am going to <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.localtime.strftime("%I:%M%p") %> to <%= status.end_time.localtime.strftime("%I:%M%p")  %>!</p>
+          <p>I am going to <strong><%= status.golf_range.name %></strong> on <%= status.start_time.strftime("%d %b %y") %> from <%= status.start_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p") %> to <%= status.end_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p")  %>!</p>
         </div>
 
         <div class="notification-actions">
@@ -76,7 +76,7 @@
               <% end %>
             <div class="notification-content">
               <p><small>@<%=friend.user.username %></small></p>
-              <p>I am going to <strong><%= friend.golf_range.name %></strong> on <%= friend.start_time.strftime("%d %b %y") %> from <%= friend.start_time.localtime.strftime("%I:%M%p") %> to <%= friend.end_time.localtime.strftime("%I:%M%p")  %>!</p>
+              <p>I am going to <strong><%= friend.golf_range.name %></strong> on <%= friend.start_time.strftime("%d %b %y") %> from <%= friend.start_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p") %> to <%= friend.end_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p")  %>!</p>
             </div>
           </div>
         <% end %>
@@ -94,3 +94,4 @@
 
 
 </div>
+<%= render "shared/btm-navbar" %>
