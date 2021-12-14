@@ -1,3 +1,27 @@
-<div class="container">
+<div class="container" data-controller="tabs">
+  <h1 class="border-bottom">Hello, <%= current_user.username %>!</h1>
+  <ul class="list-inline tabs-underlined">
+  <li>
+    <a href="#" class="tab-underlined active" data-tabs-target="status" data-action="click->tabs#statustab">Status Update</a>
+  </li>
+  <li>
+    <a href="#" class="tab-underlined" data-tabs-target="friend" data-action="click->tabs#friendtab">Friend Lists</a>
+  </li>
+  <li>
+    <a href="#" class="tab-underlined" data-tabs-target="stats" data-action="click->tabs#statstab">Stats</a>
+  </li>
+</ul>
+
+    <div class="" data-tabs-target="statuscontent">
+
+    </div>
+
+    <div class="d-none" data-tabs-target="friendcontent">
+    friend
+    </div>
+
+    <div class="d-none" data-tabs-target="statscontent">
+    stats
+    </div>
 
 </div>

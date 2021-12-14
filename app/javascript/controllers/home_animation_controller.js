@@ -18,7 +18,7 @@ export default class extends Controller {
       this.navbarTarget.classList.remove("animate-initial", "animate-action")
     }, 2000);
 
-    console.log(this.navbarTarget.classList);
+    //console.log(this.navbarTarget.classList);
   }
 
 }
