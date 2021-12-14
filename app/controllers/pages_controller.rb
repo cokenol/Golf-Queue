@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @status = StatusUpdate.all.by_latest
   end
 
   def userpost

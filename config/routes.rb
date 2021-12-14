@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get '/friends/decline/:id', to: 'friendlists#decline_friend', as: 'decline_friend'
   root to: 'queue_walls#index'
 
-  resources :status_updates
+  resources :status_updates, only: %i[index show new]
+  post '/status_updates', to: 'status_updates#create', as: 'create_status'
   resources :golf_ranges do
     resources :queue_walls, only: %i[new create]
   end
