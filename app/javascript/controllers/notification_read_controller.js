@@ -22,9 +22,15 @@ export default class extends Controller {
         .then(response => response.json())
         .then((data) => {
           console.log(data);
-          this.notificationTarget.classList.remove('unread');
+          document.querySelectorAll(".unread").forEach((b) =>{
+            b.classList.remove("unread");
+          })
+          document.querySelectorAll(".badges").forEach((b) => {
+            b.classList.add("d-none");
+          })
+          // this.notificationTarget.classList.remove('unread');
         });
-    }, 4000);
+    }, 2500);
   }
 
   disconnect() {
