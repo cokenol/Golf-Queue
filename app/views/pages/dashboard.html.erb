@@ -8,7 +8,7 @@
     <a href="#" class="tab-underlined" data-tabs-target="friend" data-action="click->tabs#friendtab">Friend Lists</a>
   </li>
   <li>
-    <a href="#" class="tab-underlined" data-tabs-target="stats" data-action="click->tabs#statstab">Stats</a>
+    <a href="#" class="tab-underlined" data-tabs-target="stats" data-action="click->tabs#statstab">My Playwall</a>
   </li>
 </ul>
 
@@ -17,20 +17,20 @@
         <div class="card">
           <div class="card-header" id="headingOne">
             <h2 class="mb-0">
-              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Click to post updates
+              <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <i class="fas fa-pen"></i> Post Update
               </button>
             </h2>
           </div>
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
               <%= simple_form_for StatusUpdate.new, url: create_status_path, wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
-              I am going to<%= f.association :golf_range, as: :select%>
+              I am going to<%= f.association :golf_range, as: :select, required: true%>
               from
-              <%= f.input :start_date, as: :date, label: false, html5: true %>
+              <%= f.input :start_date, as: :date, label: false, html5: true, required: true%>
               <% Time.use_zone("Asia/Singapore") do%>
-              <%= f.input :starttime, as: :time, label: false, minute_step: 30, input_html: {value: "19:30"} %>
-              to<%= f.input :endtime, as: :time, label: false, minute_step: 30 %>
+              <%= f.input :starttime, as: :time, label: false, minute_step: 30, input_html: {value: "19:30"}, required: true %>
+              to<%= f.input :endtime, as: :time, label: false, minute_step: 30, required: true %>
               <% end %>
               <br><%= f.submit "Post Update!", class: "btn btn-success" %>
               <% end %>
@@ -56,7 +56,7 @@
 
         <div class="notification-actions">
           <%= link_to delete_status_path(status), method: :delete, data: { confirm: "Are you sure?" } do %>
-            Delete <i class="far fa-trash-alt"></i>
+            <i class="far fa-trash-alt"></i>
           <% end %>
         </div>
       </div>
@@ -89,7 +89,7 @@
     </div>
 
     <div class="d-none" data-tabs-target="statscontent">
-    stats
+      <%= render "pages/userpost" %>
     </div>
 
 

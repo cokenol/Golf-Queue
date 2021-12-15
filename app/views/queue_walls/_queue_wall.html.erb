@@ -11,7 +11,7 @@
       <% if current_user.present? && current_user.voted_up_on?(queue_wall) %>
         <%# <h2><i class="fas fa-thumbs-up p-2"></i></h2> %>
         <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
-                          class: "fas fa-thumbs-up p-2",
+                          class: "fas fa-thumbs-up fa-lg p-2",
                           style: "color:green;",
                           remote: true,
                           method: :post,
@@ -22,7 +22,7 @@
       <% else %>
         <%# <h2><i class="far fa-thumbs-up p-2"></i></h2> %>
         <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
-                  class: "far fa-thumbs-up p-2",
+                  class: "far fa-thumbs-up fa-lg p-2",
                   style: "color:black;",
                   remote: true,
                   method: :post,
@@ -34,11 +34,11 @@
                 } %>
         <div class="alert alert-info animate__animated d-none" role="alert" data-vote-button-target="alertNotif">You need to <%= link_to "sign in", new_user_session_path %> to vote! <%= link_to "New User?", new_user_registration_path %></div>
       <% end %>
-      <h2 class="align-self-center" data-vote-button-target="upcounter" value="<%= queue_wall.get_likes.size %>"><%= queue_wall.get_likes.size %></h2>
+      <h2 class="align-self-center" data-vote-button-target="upcounter" style="font-size:1.33em;text-decoration:none;" value="<%= queue_wall.get_likes.size %>"><%= queue_wall.get_likes.size %></h2>
       <% if current_user.present? && current_user.voted_down_on?(queue_wall) %>
         <%# <h2><i class="fas fa-thumbs-up p-2"></i></h2> %>
         <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
-                          class: "fas fa-thumbs-down p-2",
+                          class: "fas fa-thumbs-down fa-lg p-2",
                           style: "color:red;",
                           remote: true,
                           method: :post,
@@ -49,7 +49,7 @@
       <% else %>
         <%# <h2><i class="far fa-thumbs-up p-2"></i></h2> %>
         <%= link_to "", toggle_vote_queue_wall_path(queue_wall),
-                  class: "far fa-thumbs-down p-2",
+                  class: "far fa-thumbs-down fa-lg p-2",
                   style: "color:black;",
                   remote: true,
                   method: :post,
@@ -63,12 +63,12 @@
       <%# <h2><i class="far fa-thumbs-down p-2"></i></h2> %>
 
       <% if  queue_wall.get_dislikes.size == 0%>
-        <h2 class="align-self-center" data-vote-button-target="downcounter" value="<%= queue_wall.get_dislikes.size %>"><%= queue_wall.get_dislikes.size %></h2>
+        <h2 class="align-self-center" data-vote-button-target="downcounter" style="font-size:1.33em;text-decoration:none;" value="<%= queue_wall.get_dislikes.size %>"><%= queue_wall.get_dislikes.size %></h2>
       <% else %>
-        <h2 class="align-self-center" data-vote-button-target="downcounter" value="<%= queue_wall.get_dislikes.size %>">-<%= queue_wall.get_dislikes.size %></h2>
+        <h2 class="align-self-center" data-vote-button-target="downcounter" style="font-size:1.33em;text-decoration:none;" value="<%= queue_wall.get_dislikes.size %>">-<%= queue_wall.get_dislikes.size %></h2>
       <% end %>
       <div class="dropdown">
-        <button class="ml-2 fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown"></button>
+        <button class="ml-2 fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="color:black;"></button>
             <div class="dropdown-menu dropdown-menu-right ">
               <%= link_to new_queue_wall_queue_wall_reports_path(queue_wall), class: "text-danger dropdown-item" do%>
               <i class="fas fa-exclamation-circle"></i><span> Submit Violation</span>

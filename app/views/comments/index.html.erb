@@ -14,8 +14,8 @@
 
 <div class="btm-commentbar">
   <%= simple_form_for [ @playwall, @comment ], html: { class: "d-flex align-items-start pt-2", style:"width: 80vw;"} do |f| %>
-  <%= f.input :content, as: :string, class: "mb-0", label: false, input_html: { placeholder:"New comment", style:"width: 65vw;" } %>
+  <%= f.input :content, as: :string, class: "mb-0", label: false, input_html: { placeholder:"New comment", style:"width: 65vw;" }, required: true %>
   <%# style:"width: 65vw;" %>
-  <%= f.submit "Post", class: "btn btn-outline-primary" %>
+  <%= f.submit "Post", class: "btn" %>
   <% end %>
 </div>

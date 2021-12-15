@@ -1,50 +1,52 @@
 <div class="container">
-  <h1>Search for fellow golfers!</h1>
+  <h1>Search for golfers!</h1>
     <%= simple_form_for :search, url: search_friends_path, method: :get , html: { class: 'form-inline'} do |f| %>
       <%= f.input :username, label: false, input_html: {value: "", style: 'margin-top: 1rem;'} %>
-      <%= f.submit "Search", class: "btn btn-primary" %>
+      <%= f.submit "Search", class: "btn" %>
     <% end %>
 
-<% if @usernames.present? %>
+
+<% if @result == true %>
+
 <h5 class="mt-4">Found <%= @usernames.count %> golfer!</h5>
-<% @usernames.each do |user| %>
-  <div class="card-product my-2">
-      <% if user.image.present? %>
-        <%= image_tag user.image %>
-      <% elsif user.photo.key.present? %>
-        <%= cl_image_tag user.photo.key%>
-      <% else %>
-        <%= image_tag 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
-      <% end %>
-      <div class="card-product-infos flex-grow-1">
-        <h2>@<%= user.username %></h2>
-        <p>Something about the friend here</p>
-      </div>
-
-
-
-
-      <div class="pr-2">
-      <% if current_user == user %>
-      <% elsif current_user.friends.include?(user) %>
-        <i class="fas fa-user-friends text-primary"></i>
-      <% elsif current_user.pending_friends.include?(user) || current_user.requested_friends.include?(user) %>
-        <i class="fas fa-user-clock text-info"></i>
-      <% elsif current_user.blocked_friends.include?(user) %>
-        <i class="fas fa-user-slash text-danger"></i>
-      <% else %>
-        <%= link_to add_friend_path(user), class: "text-success" do %>
-          <i class="fas fa-user-plus"></i>
+  <% @usernames.each do |user| %>
+    <div class="card-product my-2">
+        <% if user.image.present? %>
+          <%= image_tag user.image %>
+        <% elsif user.photo.key.present? %>
+          <%= cl_image_tag user.photo.key%>
+        <% else %>
+          <%= image_tag 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
         <% end %>
-        <%= link_to block_friend_path(user), class: "text-danger",  method: :post, data: { confirm: "Blocking. Are you sure?" } do %>
-          <i class="fas fa-ban"></i>
+        <div class="card-product-infos flex-grow-1">
+          <h2>@<%= user.username %></h2>
+        </div>
+
+
+
+
+        <div class="pr-2">
+        <% if current_user == user %>
+        <% elsif current_user.friends.include?(user) %>
+          <i class="fas fa-user-friends fa-lg text-primary"></i>
+        <% elsif current_user.pending_friends.include?(user) || current_user.requested_friends.include?(user) %>
+          <i class="fas fa-user-clock fa-lg text-info"></i>
+        <% elsif current_user.blocked_friends.include?(user) %>
+          <i class="fas fa-user-slash fa-lg text-danger"></i>
+        <% else %>
+          <%= link_to add_friend_path(user), class: "text-success" do %>
+            <i class="fas fa-user-plus fa-lg pr-2"></i>
+          <% end %>
+          <%= link_to block_friend_path(user), class: "text-danger",  method: :post, data: { confirm: "Blocking. Are you sure?" } do %>
+            <i class="fas fa-ban fa-lg pr-2"></i>
+          <% end %>
         <% end %>
-      <% end %>
 
-      </div>
-</div>
-<% end %>
-
+        </div>
+  </div>
+  <% end %>
+  <% elsif @result == false %>
+  <h6 class="mt-4">No Results for '<i><%= params["search"]["username"] %></i>'</h6>
 <% end %>
   <%= link_to "Go Back", friends_path  %>
 </div>

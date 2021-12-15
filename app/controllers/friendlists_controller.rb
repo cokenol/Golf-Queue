@@ -8,6 +8,11 @@ class FriendlistsController < ApplicationController
     if @search.present?
       @username = @search["username"]
       @usernames = User.search_by_username_email(@username)
+      if @usernames.empty?
+        @result = false
+      else
+        @result = true
+      end
     end
   end
 

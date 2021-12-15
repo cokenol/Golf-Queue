@@ -53,8 +53,8 @@
       <% if playwall_post.favoritors.include?(current_user) %>
 
       <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
-                              class: "fas fa-heart",
-                              style: "color:#bf0206;",
+                              class: "fas fa-heart fa-lg",
+                              style: "color:#bf0206; text-decoration:none",
                               remote: true,
                               method: :post,
                               data: {
@@ -63,8 +63,8 @@
                             } %>
       <% else %>
             <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
-                              class: "far fa-heart",
-                              style: "color:black;",
+                              class: "far fa-heart fa-lg",
+                              style: "color:black; text-decoration:none",
                               remote: true,
                               method: :post,
                               data: {
@@ -72,10 +72,10 @@
                               action: 'click->like-button#unlike'
                             } %>
       <% end %>
-      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
+      <span data-like-button-target="counter" style="font-size:1.33em;" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
       <div class="dropdown">
 
-        <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown"></button>
+        <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="color:black;"></button>
             <div class="dropdown-menu dropdown-menu-right ">
       <% if current_user == playwall_post.user %>
       <% elsif current_user.friends.include?(playwall_post.user) %>
