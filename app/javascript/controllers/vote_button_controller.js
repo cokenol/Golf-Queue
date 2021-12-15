@@ -30,8 +30,8 @@ export default class extends Controller {
     }
     else {
       this.emptyLikeBtnTarget.className = "";
-      this.emptyLikeBtnTarget.setAttribute("style", "color:green;");
-      this.emptyLikeBtnTarget.classList.add("fas", "fa-thumbs-up", "p-2");
+      this.emptyLikeBtnTarget.setAttribute("style", "color:green;text-decoration:none;");
+      this.emptyLikeBtnTarget.classList.add("fas", "fa-thumbs-up", "p-2", "fa-lg");
       this.emptyLikeBtnTarget.setAttribute("data-vote-button-target", "filledLikeBtn");
       this.upcounterTarget.innerText = parseInt(this.upcounterTarget.getAttribute("value")) + 1;
 
@@ -56,8 +56,8 @@ export default class extends Controller {
     }
     else {
       this.emptyDislikeBtnTarget.className = "";
-      this.emptyDislikeBtnTarget.setAttribute("style", "color:red;");
-      this.emptyDislikeBtnTarget.classList.add("fas", "fa-thumbs-down", "p-2");
+      this.emptyDislikeBtnTarget.setAttribute("style", "color:red;text-decoration:none;");
+      this.emptyDislikeBtnTarget.classList.add("fas", "fa-thumbs-down", "p-2", "fa-lg");
       this.emptyDislikeBtnTarget.setAttribute("data-vote-button-target", "filledDislikeBtn")
       this.downcounterTarget.innerText = parseInt(this.downcounterTarget.getAttribute("value")) - 1;
       if (this.hasEmptyLikeBtnTarget) {
@@ -79,16 +79,16 @@ export default class extends Controller {
 
   filledtoemptydislike(){
     this.filledDislikeBtnTarget.className = "";
-    this.filledDislikeBtnTarget.classList.add("far", "fa-thumbs-down", "p-2");
-    this.filledDislikeBtnTarget.setAttribute("style", "color:black;");
+    this.filledDislikeBtnTarget.classList.add("far", "fa-thumbs-down", "p-2", "fa-lg");
+    this.filledDislikeBtnTarget.setAttribute("style", "color:black;text-decoration:none;");
     this.filledDislikeBtnTarget.setAttribute("href", "");
     this.filledDislikeBtnTarget.setAttribute("data-vote-button-target", "emptyDislikeBtn")
   }
 
   filledtoemptylike(){
     this.filledLikeBtnTarget.className = "";
-    this.filledLikeBtnTarget.classList.add("far", "fa-thumbs-up", "p-2");
-    this.filledLikeBtnTarget.setAttribute("style", "color:black;");
+    this.filledLikeBtnTarget.classList.add("far", "fa-thumbs-up", "p-2", "fa-lg");
+    this.filledLikeBtnTarget.setAttribute("style", "color:black;text-decoration:none;");
     this.filledLikeBtnTarget.setAttribute("href", "");
     this.filledLikeBtnTarget.setAttribute("data-vote-button-target", "emptyLikeBtn")
   }

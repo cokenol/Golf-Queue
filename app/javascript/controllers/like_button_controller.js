@@ -12,13 +12,13 @@ export default class extends Controller {
 
   like(event) {
     this.likebtnTarget.className = "";
-    this.likebtnTarget.classList.add("far", "fa-heart");
+    this.likebtnTarget.classList.add("far", "fa-heart", "fa-lg");
     this.counterTarget.innerText = parseInt(this.counterTarget.getAttribute("value")) - 1;
   }
 
   unlike(event) {
     this.unlikebtnTarget.className = "";
-    this.unlikebtnTarget.classList.add("fas", "fa-heart", "text-danger");
+    this.unlikebtnTarget.classList.add("fas", "fa-heart", "fa-lg", "text-danger");
     this.counterTarget.innerText = parseInt(this.counterTarget.getAttribute("value")) + 1;
   }
 }
