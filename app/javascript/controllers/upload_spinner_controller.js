@@ -53,7 +53,7 @@ export default class extends Controller {
         console.warn('Errorr:', error);
         this.loadingTarget.classList.add("d-none");
         this.submitTarget.classList.remove("d-none");
-        alert("Form missing inputs!");
+        alert("Form missing inputs!/ Not near selected location!");
       });
   }
 }
