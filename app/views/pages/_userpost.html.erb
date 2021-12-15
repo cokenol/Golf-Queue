@@ -1,0 +1,116 @@
+<div class="container">
+
+<% current_user.playwall_posts.by_latest.each do |playwall_post| %>
+    <div class="card-trip">
+          <div class="card-trip-infos">
+            <h2 class="pt-2 d-flex align-items-center">
+          <% if playwall_post.user.photo.attached? %>
+            <%= cl_image_tag playwall_post.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar" %>
+          <% elsif playwall_post.user.image.present? %>
+            <%= image_tag playwall_post.user.image , class: "avatar" %>
+          <% else %>
+            <i class="far fa-user-circle avatar fa-2x text-black"></i>
+          <% end %>
+          @<%= playwall_post.user.username %></h2>
+            <p class="text-muted"><%= playwall_post.golf_range.name %></p>
+          </div>
+        <% if playwall_post.photos.attached? %>
+          <% if playwall_post.photos.count > 1 %>
+            <div id="<%= playwall_post.id %>photos" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <% playwall_post.photos.each.with_index do |photo, index| %>
+                <li data-target="#<%= playwall_post.id %>photos" data-slide-to="<%= index %>" class="<%= index.zero? ? "active" : "" %>"></li>
+              <% end %>
+            </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
+                </div>
+                <% playwall_post.photos[1..-1].each do |photo| %>
+                <div class="carousel-item">
+                  <%= cl_image_tag photo.key, class: "d-block w-100", crop: :fill %>
+                </div>
+                <% end %>
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-target="#<%= playwall_post.id %>photos" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-target="#<%= playwall_post.id %>photos" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </button>
+            </div>
+            <% else %>
+              <div class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
+                </div>
+              </div>
+            </div>
+      <% end %>
+    <% end %>
+
+
+    <div class="card-trip-infos pt-2" data-controller="like-button">
+      <h2>
+      <% if playwall_post.favoritors.include?(current_user) %>
+
+      <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
+                              class: "fas fa-heart",
+                              style: "color:#bf0206;",
+                              remote: true,
+                              method: :post,
+                              data: {
+                              like_button_target: 'likebtn',
+                              action: 'click->like-button#like'
+                            } %>
+      <% else %>
+            <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
+                              class: "far fa-heart",
+                              style: "color:black;",
+                              remote: true,
+                              method: :post,
+                              data: {
+                              like_button_target: 'unlikebtn',
+                              action: 'click->like-button#unlike'
+                            } %>
+      <% end %>
+      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
+      <div class="dropdown">
+        <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown"></button>
+            <div class="dropdown-menu dropdown-menu-right ">
+              <%= link_to "Submit Violation", new_playwall_post_play_wall_report_path(playwall_post)%>
+            </div>
+      </div>
+    </div>
+    <div class="card-trip-infos pt-3">
+      <h6><%= playwall_post.caption %></h6>
+    </div>
+      <div class="card-trip-infos pt-3">
+
+  <% if playwall_post.comments.present? %>
+    <% rand_comment = playwall_post.comments.sample %>
+    <span><b><%= rand_comment.user.username %></b> <%= rand_comment.content %></span>
+  <% end %>
+
+  </div>
+  <div class="card-trip-infos">
+    <% if playwall_post.comments.count.zero?  %>
+      <%= link_to "Add a comment", playwall_post_comments_path(playwall_post)  %>
+    <% else %>
+      <%= link_to "View all #{playwall_post.comments.count} comments", playwall_post_comments_path(playwall_post)  %>
+    <% end %>
+  </div>
+    <div class="card-trip-infos pt-3">
+      <p class="text-muted"><i class="far fa-clock"></i>posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
+    </div>
+  </div>
+
+<% end %>
+
+</div>
+
+<%= render 'shared/btm-navbar' %>

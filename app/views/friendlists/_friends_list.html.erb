@@ -1,4 +1,4 @@
-    <%= link_to "Search for Golfers", search_friends_path, class: "btn btn-primary mb-2"  %>
+    <%= link_to "Search for Golfers", search_friends_path, class: "btn mb-2"  %>
   <% if current_user.friends.count == 0 %>
     <h6>You got no friends, try adding some!</h6>
   <% else %>
@@ -94,10 +94,10 @@
       <div class="pr-2">
 
           <%= link_to accept_friend_path(user), class: "text-success" do %>
-            <i class="fas fa-check"></i>
+            <i class="fas fa-check fa-lg pr-3" style="text-decoration:none;"></i>
           <% end %>
           <%= link_to decline_friend_path(user), class: "text-danger" do %>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times fa-lg pr-2" style="text-decoration:none;"></i>
           <% end %>
 
       </div>
