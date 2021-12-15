@@ -24,7 +24,7 @@
       <% end %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="position: relative;">
-        <div class="<%= current_user.notifications.unread.count.zero? ? "" : "badges" %>" style="position: absolute; top: -1rem; left: -1.5rem; font-size: 1rem;"><%= current_user.notifications.unread.count if current_user.notifications.unread.count.positive? %></div>
+        <div class="<%= current_user.present? && current_user.notifications.unread.count.positive? ? "badges" : "" %>" style="position: absolute; top: -1rem; left: -1.5rem; font-size: 1rem;"><%= current_user.notifications.unread.count if current_user.present? && current_user.notifications.unread.count.positive? %></div>
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -33,7 +33,7 @@
           <% if user_signed_in? %>
             <li class="nav-item active d-flex align-items-center">
               <%= link_to "Notifications", notifications_path, class: "nav-link" %>
-              <div class="<%= current_user.notifications.unread.count.zero? ? "" : "badges" %>"><%= current_user.notifications.unread.count if current_user.notifications.unread.count.positive? %></div>
+              <div class="<%= current_user.present? && current_user.notifications.unread.count.positive? ? "badges" : "" %>"><%= current_user.notifications.unread.count if current_user.present? && current_user.notifications.unread.count.positive? %></div>
             </li>
             <li class="nav-item dropdown">
 
