@@ -79,3 +79,4 @@ gem 'has_friendship', github: 'sungwoncho/has_friendship'
 gem 'pg_search'
 gem 'noticed'
 gem 'apnotic'
+gem "serviceworker-rails"

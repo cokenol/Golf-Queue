@@ -30,6 +30,9 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
 });
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/serviceworker.js');
+}
 
 
 import "controllers"
