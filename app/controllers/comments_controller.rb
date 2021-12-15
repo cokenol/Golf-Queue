@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     @playwall = PlaywallPost.find(params[:playwall_post_id])
     @comment.playwall_post = @playwall
 
-    @pagy, @comments = pagy(PlaywallPost.find(params[:playwall_post_id]).comments.by_latest, items: 15)
+    @pagy, @comments = pagy(PlaywallPost.find(params[:playwall_post_id]).comments, items: 15)
     # raise
     respond_to do |format|
         format.html
