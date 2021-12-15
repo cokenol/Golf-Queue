@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" data-controller="upload-spinner">
   <% @queue.level = params[:level] %>
   <% @queue.level = params["queue_wall"]["level"] if @queue.level.nil? %>
   <h1 class="text-center">Update queue for <%= @golfrange.name %> @ <%= @queue.level  %></h1>
   <div data-controller='queue-update'>
-    <%= simple_form_for [@golfrange, @queue] do |f|  %>
+    <%= simple_form_for [@golfrange, @queue], html: { data: { 'upload-spinner-target': "form", 'controller': "weather" } } do |f|  %>
       <%= f.input :level, as: :hidden  %>
       <%= f.input :queue_length,
                   as: :range,
@@ -13,7 +13,14 @@
                     } %>
       <%= f.input :queue_length, input_html: { 'data-queue-update-target': 'output' }, label: false  %>
       <%= f.input :photo, as: :file %>
-      <%= f.button :submit, class: "btn" %>
+      <%= f.button :submit, class: "btn", 'data-upload-spinner-target': 'submit', 'data-action': 'click->upload-spinner#send'  %>
+      <button class="btn d-none" data-upload-spinner-target="loading">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+        </span>
+        <span class="sr-only" >
+          Loading...
+        </span >
+      </button>
     <% end %>
   </div>
 </div>

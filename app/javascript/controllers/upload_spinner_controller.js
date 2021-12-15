@@ -16,12 +16,12 @@ export default class extends Controller {
     this.loadingMarkup = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           <span class="sr-only" > Loading...</span >`
     // Once, when the controller is first instantiated
-    console.log("Generated Controller Initialized!");
+    console.log("Loading animation Controller Initialized!");
   }
 
   connect() {
     // Anytime the controller is connected to the DOM
-    console.log("Generated Controller Connected!");
+    console.log("Loading animation Controller Connected!");
   }
 
   send(e) {
@@ -32,7 +32,7 @@ export default class extends Controller {
     this.submitTarget.classList.add("d-none")
     this.loadingTarget.classList.remove("d-none")
     //  'Accept': "application/json",
-    console.log(this.photoTarget);
+    // console.log(this.photoTarget);
     // debugger;
     fetch(this.formTarget.action, {
       method: 'POST',
@@ -42,7 +42,8 @@ export default class extends Controller {
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
-          window.location = '/playwall_posts'
+          if (window.location.href )
+          window.location = data.location
         } else if (data.status === 'failure') {
           this.loadingTarget.classList.add("d-none");
           this.submitTarget.classList.remove("d-none");

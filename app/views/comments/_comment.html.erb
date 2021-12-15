@@ -1,3 +1,6 @@
 <ul class="list-group list-group-flush">
-  <li class="list-group-item"><b><%= comment.user.username %></b> <%= comment.content %></li>
+  <li class="list-group-item">
+    <b><%= comment.user.username %></b> <%= comment.content %>
+    <br><%= time_ago_in_words(comment.created_at).gsub('about ','') %> ago
+  </li>
 </ul>
