@@ -3,8 +3,8 @@
       <%= f.input :caption, label: "What's on your mind?" %>
       <%= f.association :golf_range, label: "Location"  %>
       <%= f.input :photos, as: :file, input_html: { multiple: true, 'data-upload-spinner-target': 'photo'} %>
-      <%= f.button :submit, class: "btn btn-primary", 'data-upload-spinner-target': 'submit', 'data-action': 'click->upload-spinner#send' %>
-      <button class="btn btn-primary d-none" data-upload-spinner-target="loading">
+      <%= f.button :submit, class: "btn", 'data-upload-spinner-target': 'submit', 'data-action': 'click->upload-spinner#send' %>
+      <button class="btn d-none" data-upload-spinner-target="loading">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
         </span>
         <span class="sr-only" >

@@ -29,13 +29,18 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    @playwall = PlaywallPost.find(params[:playwall_post_id])
-    @comment.user = current_user
-    @comment.playwall_post = @playwall
-    redirect_to playwall_post_comments_path if @comment.save
-    notification = CommentNotification.with(comment: @comment)
-    notification.deliver(@comment.playwall_post.user)
+      @comment = Comment.new(comment_params)
+      @playwall = PlaywallPost.find(params[:playwall_post_id])
+      @comment.user = current_user
+      @comment.playwall_post = @playwall
+      if @comment.save
+        redirect_to playwall_post_comments_path
+        notification = CommentNotification.with(comment: @comment)
+        notification.deliver(@comment.playwall_post.user)
+      else
+        flash[:notice] = "Comments cannot be empty!"
+        redirect_to playwall_post_comments_path
+      end
   end
 
   private
