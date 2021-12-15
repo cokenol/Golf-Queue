@@ -1,6 +1,11 @@
 <div class="container card-container">
-  <div class="card-category d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)); height: 90px; margin: 0 auto -0.7rem">
-    <h4>Legend:</h4>
+  <div class="card-category d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)); height: 70px; margin: 0 auto -0.7rem">
+    <div class="left d-flex flex-column align-items-center">
+      <h6>Legend:</h6>
+      <div class="text-success" style="font-size: 0.8rem;">
+            <i class="fas fa-user-friends mx-2"></i><span style="color: white;">Friends</span>
+      </div>
+    </div>
     <div class="queue-color-info">
       <div class="m-0 d-flex justify-content-left align-items-center" style="color: rgba(255,255,0,1);">
         <p class="px-2 m-0">
@@ -19,7 +24,7 @@
         <span style="color: white;">Old</span>
       </div>
     </div>
-    <div class="queue-pax-info">
+    <div class="queue-pax-info" style="font-size: 0.8rem;">
       <div class="m-0 d-flex justify-content-around align-items-center">
         <p class="px-2 m-0">
           <% 1.times do %>
@@ -48,14 +53,21 @@
   </div>
   <% @ranges.each_with_index do |q, index|  %>
     <%= link_to golf_range_path(q) do   %>
-
-
-
       <div class="card-category d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(<%= q.photo_url %>)">
 
         <div class="d-flex justify-content-between w-100">
-          <div class="title">
+          <div class="title d-flex">
             <h4><%= q.name.first(11) %></h4>
+            <% if current_user.present? %>
+              <% onsite = q.status_updates.select do |e| %>
+              <%  Time.now > e.start_time && Time.now < e.end_time && current_user.friends.include?(e.user) %>
+              <% end %>
+              <% if onsite.present? %>
+                <div class="ml-4 text-success">
+                      <i class="fas fa-user-friends pr-2"></i><%= onsite.count %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
           <div class="weather-status m-0">
             <h4 class="px-1"><%= image_tag "https://openweathermap.org/img/wn/#{@weather[index]}.png" %></h4>
@@ -71,9 +83,9 @@
               <h4><i class="fas fa-car"></i><%= ": -" %></h4>
             <% end %>
           </div>
-          <div class="px-3" style="margin-right: 2rem;">
+          <div class="px-3" style="flex-grow: 0.3;">
             <% if q.queue_walls.present? %>
-              <p class="px-3"; style="margin: 0; line-height:1.0;">Pax in queue:</p>
+              <p class="text-center" style="margin: 0; line-height:1.0;">Pax in q:</p>
               <div class="queue-status d-flex justify-content-between">
                 <% @queues.by_range(q.id).by_level_and_latest.each do |q| %>
                   <div class="level-queue d-flex flex-column px-1 align-items-center">
@@ -88,29 +100,10 @@
                 <% end %>
               </div>
             <% end %>
-
-          </div>
-        <% if current_user.present? %>
-          <% onsite = q.status_updates.select do |e| %>
-          <%  Time.now > e.start_time && Time.now < e.end_time && current_user.friends.include?(e.user) %>
-        <% end %>
-
-          <% if onsite.present? %>
-          <div class="ml-4 text-success">
-                <i class="fas fa-user-friends pr-2"></i><%= onsite.count %>
           </div>
 
-          <% end %>
-
-
-        <% end %>
         </div>
       </div>
     <% end %>
   <% end %>
 </div>
-<!---
-<% unless @lat_lng %>
-  <%= javascript_include_tag "currentcoords.js" %>
-<% end %>
---->
