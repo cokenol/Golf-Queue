@@ -1,5 +1,7 @@
 <div class="container">
-  <%= link_to 'Back', 'javascript:history.back()', class:"btn btn-danger my-3", style:"position: fixed; top: 60px;; left: 20px;"  %>
+  <%= link_to 'javascript:history.back()', class:"btn btn-danger my-3", style:"position: fixed; top: 60px;; left: 20px;"  do %>
+    <i class="fas fa-arrow-left"></i>
+  <% end %>
   <h4 class="text-center">Comments</h4>
   <div data-controller="infinite-scroll"> <!--data-action="scroll@window->infinite-scroll#scroll"-->
     <div data-infinite-scroll-target="entries">
