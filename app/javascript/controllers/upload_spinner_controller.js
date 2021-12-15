@@ -10,7 +10,7 @@ import { csrfToken } from "@rails/ujs";
 
 
 export default class extends Controller {
-  static targets = ['submit', 'loading', 'form', 'photo'];
+  static targets = ['submit', 'loading', 'form', 'photo', 'farNotif', 'errorNotif'];
 
   initialize() {
     this.loadingMarkup = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -47,14 +47,18 @@ export default class extends Controller {
         } else if (data.status === 'failure') {
           this.loadingTarget.classList.add("d-none");
           this.submitTarget.classList.remove("d-none");
-          alert("You need to be near the golf range to post!");
+          //alert("You need to be near the golf range to post!");
+          this.farNotifTarget.classList.remove("d-none");
+          this.farNotifTarget.classList.add("animate__fadeInUp");
         };
       })
       .catch(error => {
         console.warn('Errorr:', error);
         this.loadingTarget.classList.add("d-none");
         this.submitTarget.classList.remove("d-none");
-        alert("Form missing inputs!/ Not near selected location!");
+        //alert("Form missing inputs!/ Not near selected location!");
+        this.errorNotifTarget.classList.remove("d-none");
+        this.errorNotifTarget.classList.add("animate__fadeInUp");
       });
   }
 }
