@@ -1,8 +1,10 @@
 <div class="card-product">
       <% if @friend.image.present? %>
         <%= image_tag friend.image %>
+      <% elsif %>
+        <%= cl_image_tag friend.photo.key%>
       <% else %>
-        <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+        <%= image_tag 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
       <% end %>
       <div class="card-product-infos">
         <h2>@<%= friend.username %></h2>
