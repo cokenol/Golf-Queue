@@ -1,5 +1,5 @@
 <div class="container" data-controller="upload-spinner">
-  <%= simple_form_for(@playwall, remote: true, html: { data: { 'upload-spinner-target': "form" } }) do |f| %>
+  <%= simple_form_for(@playwall, remote: true, html: { data: { 'upload-spinner-target': "form", 'controller': "weather" } }) do |f| %>
       <%= f.input :caption, label: "What's on your mind?" %>
       <%= f.association :golf_range, label: "Location"  %>
       <%= f.input :photos, as: :file, input_html: { multiple: true, 'data-upload-spinner-target': 'photo'} %>
