@@ -6,8 +6,10 @@
       <div class="card-product mb-3">
         <% if friend.image.present? %>
           <%= image_tag friend.image %>
-        <% else %>
-          <%= cl_image_tag friend.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+        <% elsif friend.photo.key.present? %>
+          <%= cl_image_tag friend.photo.key %>
+        <% else  %>
+          <%= image_tag 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
         <% end %>
         <div class="card-product-infos flex-grow-1">
           <h2>@<%= friend.username %></h2>
@@ -83,8 +85,10 @@
     <div class="card-product mt-2">
       <% if user.image.present? %>
         <%= image_tag user.image %>
+      <% elsif user.photo.key.present? %>
+        <%= cl_image_tag user.photo.key  %>
       <% else %>
-        <%= cl_image_tag user.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+       <%= image_tag 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
       <% end %>
       <div class="card-product-infos flex-grow-1">
         <h2>@<%= user.username %></h2>
@@ -114,8 +118,10 @@
     <div class="card-product mt-2">
       <% if user.image.present? %>
         <%= image_tag user.image %>
+      <% elsif user.photo.key.present? %>
+        <%= cl_image_tag user.photo.key  %>
       <% else %>
-        <%= cl_image_tag user.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+       <%= image_tag 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
       <% end %>
       <div class="card-product-infos flex-grow-1">
         <h2>@<%= user.username %></h2>
