@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Search for fellow golfers!</h1>
-    <%= simple_form_for :search, url: search_friends_path, method: :get , html: { class: 'form-inline' } do |f| %>
-      <%= f.input :username, label: false, input_html: {value: ""} %>
+    <%= simple_form_for :search, url: search_friends_path, method: :get , html: { class: 'form-inline'} do |f| %>
+      <%= f.input :username, label: false, input_html: {value: "", style: 'margin-top: 1rem;'} %>
       <%= f.submit "Search", class: "btn btn-primary" %>
     <% end %>
 
@@ -11,8 +11,10 @@
   <div class="card-product my-2">
       <% if user.image.present? %>
         <%= image_tag user.image %>
+      <% elsif user.photo.key.present? %>
+        <%= cl_image_tag user.photo.key%>
       <% else %>
-        <%= cl_image_tag user.photo.key || 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
+        <%= image_tag 'https://res.cloudinary.com/din6svi45/image/upload/v1639364664/production/golflogo_tt4byq.png' %>
       <% end %>
       <div class="card-product-infos flex-grow-1">
         <h2>@<%= user.username %></h2>
