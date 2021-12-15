@@ -28,11 +28,20 @@ class PlaywallPostsController < ApplicationController
     if within_range?(coords, GolfRange.find(post_params[:golf_range_id]))
       @playwall.save
       respond_to do |format|
-        format.json { render json: { status: 'success' } }
+        format.json {
+          render json: {
+            status: 'success',
+            location: "/playwall_posts"
+            }
+        }
       end
     else
       respond_to do |format|
-        format.json { render json: { status: 'failure' } }
+        format.json { render json: {
+          status: 'failure',
+          message: "You need to be near the golf range; to post!"
+          }
+        }
       end
     end
   end
