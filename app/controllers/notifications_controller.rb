@@ -1,12 +1,15 @@
 class NotificationsController < ApplicationController
 
   def index
-    @notifications = current_user.notifications.sorted_unread.first(15)
+    if current_user.notifications.unread.count.zero?
+      @notifications = current_user.notifications.newest_first.first(15)
+    else
+      @notifications = current_user.notifications.sorted_unread.first(15)
+    end
   end
 
   def mark_read
-    @notifications = current_user.notifications.sorted_unread.first(15)
-
+    index
     @notifications.each do |n|
       n.mark_as_read!
     end
