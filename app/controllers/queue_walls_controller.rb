@@ -35,8 +35,17 @@ class QueueWallsController < ApplicationController
     @queue.user = current_user
     @queue.golf_range = @golfrange
     if @queue.save
-      redirect_to @golfrange
+      respond_to do |format|
+        format.json { render json: {
+          status: 'success',
+          location: "/golf_ranges/#{@golfrange.id}"}};
+      end
     else
+      respond_to do |format|
+        format.json { render json: {
+          status: 'failure',
+          message: 'Form missing inputs' }};
+      end
       flash[:alert] = "Invalid input."
       render :new, level: @queue.level
     end
