@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <h4 class="mt-2">Your Updates</h4>
+      <h5 class="mt-2">Your Updates</h5>
       <% current_user.status_updates.by_latest.each do |status| %>
       <div class="notification">
         <% if status.user.photo.attached? %>
@@ -62,7 +62,7 @@
       </div>
       <% end %>
 
-      <h4 class="mt-2">Your Friends Updates</h4>
+      <h5 class="mt-2">Your Friends Updates</h5>
 
 
         <% @friendstatus.each do |friend| %>
