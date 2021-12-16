@@ -4,12 +4,10 @@
       <%= f.association :golf_range, label: "Location"  %>
       <%= f.input :photos, as: :file, input_html: { multiple: true, 'data-upload-spinner-target': 'photo'} %>
       <%= f.button :submit, class: "btn", 'data-upload-spinner-target': 'submit', 'data-action': 'click->upload-spinner#send' %>
-      <button class="btn d-none" data-upload-spinner-target="loading">
+      <button class="btn d-none" style="background-color: gray;" data-upload-spinner-target="loading">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
         </span>
-        <span class="sr-only" >
-          Loading...
-        </span >
+        Uploading...
       </button>
   <% end %>
   <div class="alert alert-danger animate__animated w-100 d-none" style="right:0px;" role="alert" data-upload-spinner-target="farNotif">"You need to be near the golf range to post!"</div>
