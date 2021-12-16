@@ -77,7 +77,7 @@
 
 
   <% if current_user.requested_friends.present? %>
-  <h4>Sent Request</h4>
+  <h5 class="mt-1">Sent Request</h5>
 
     <% current_user.requested_friends.each do |user| %>
 
@@ -95,7 +95,7 @@
 
         <p>This golfer wants to be your friend!</p>
       </div>
-      <div class="pr-2">
+      <div class="d-flex flex-row">
 
           <%= link_to accept_friend_path(user), class: "text-success" do %>
             <i class="fas fa-check fa-lg pr-2" style="text-decoration:none;"></i>
@@ -110,7 +110,7 @@
   <% end %>
 
     <% if current_user.pending_friends.present? %>
-  <h4>Pending Request</h4>
+  <h5 class="mt-1">Pending Request</h5>
 
     <% current_user.pending_friends.each do |user| %>
 
