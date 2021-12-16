@@ -1,8 +1,13 @@
 <div class="container">
   <%= render @queues.by_level_and_latest.reverse %>
       <% if current_user.present? %>
-    <%= render "pages/friendstatus" %>
 
-    <% end %>
+        <% if @friendstatus.present? %>
+          <%= render "pages/friendstatus" %>
+
+        <% end %>
+
+
+      <% end %>
 </div>
 <%= render 'shared/btm-navbar' %>
