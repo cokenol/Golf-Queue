@@ -80,21 +80,30 @@
       <span data-like-button-target="counter" style="font-size:1.33em;" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
       <div class="dropdown">
 
-        <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="color:black;"></button>
+<button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="color:black;"></button>
             <div class="dropdown-menu dropdown-menu-right ">
       <% if current_user == playwall_post.user %>
+        <%= link_to delete_post_path(playwall_post), class: "text-danger dropdown-item", method: :delete, data: { confirm: "Are you sure?" } do  %>
+          <i class="fas fa-trash-alt"></i><span> Delete Post</span>
+        <% end %>
       <% elsif current_user.friends.include?(playwall_post.user) %>
               <span class="dropdown-item text-primary"><i class="fas fa-user-friends"></i> Friend</span>
+              <%= link_to new_playwall_post_play_wall_report_path(playwall_post), class: "text-danger dropdown-item" do %>
+                <i class="fas fa-exclamation-circle"></i><span> Submit Violation</span>
+              <% end %>
       <% elsif current_user.pending_friends.include?(playwall_post.user) || current_user.requested_friends.include?(playwall_post.user) %>
               <span class="dropdown-item text-info"><i class="fas fa-user-clock"></i> Pending Friend Request</span>
+              <%= link_to new_playwall_post_play_wall_report_path(playwall_post), class: "text-danger dropdown-item" do %>
+                <i class="fas fa-exclamation-circle"></i><span> Submit Violation</span>
+              <% end %>
       <% else %>
               <%= link_to add_friend_path(playwall_post.user), class: "text-success dropdown-item" do %>
                 <i class="fas fa-user-plus"></i><span> Add User</span>
               <% end %>
-      <% end %>
               <%= link_to new_playwall_post_play_wall_report_path(playwall_post), class: "text-danger dropdown-item" do %>
                 <i class="fas fa-exclamation-circle"></i><span> Submit Violation</span>
               <% end %>
+      <% end %>
             </div>
 
       </div>
