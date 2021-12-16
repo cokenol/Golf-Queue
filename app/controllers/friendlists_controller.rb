@@ -22,7 +22,7 @@ class FriendlistsController < ApplicationController
   def add_friend
     # @friend = User.find(params[:id])
     redirect_to request.referer if current_user.friend_request(@friend)
-    flash[:success] = "Added @#{@friend.username} to friendlist."
+    flash[:success] = "Friend request sent to @#{@friend.username}."
   end
 
   def block_friend
