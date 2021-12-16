@@ -1,9 +1,8 @@
-<div class="container">
 
 <% current_user.playwall_posts.by_latest.each do |playwall_post| %>
-    <div class="card-trip">
-          <div class="card-trip-infos">
-            <h2 class="pt-2 d-flex align-items-center">
+<div class="card-trip">
+      <div class="card-trip-infos">
+        <h2 class="p-2 d-flex align-items-center">
           <% if playwall_post.user.photo.attached? %>
             <%= cl_image_tag playwall_post.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar" %>
           <% elsif playwall_post.user.image.present? %>
@@ -12,8 +11,8 @@
             <i class="far fa-user-circle avatar fa-2x text-black"></i>
           <% end %>
           @<%= playwall_post.user.username %></h2>
-            <p class="text-muted"><%= playwall_post.golf_range.name %></p>
-          </div>
+        <p class="text-muted"><%= playwall_post.golf_range.name %></p>
+      </div>
         <% if playwall_post.photos.attached? %>
           <% if playwall_post.photos.count > 1 %>
             <div id="<%= playwall_post.id %>photos" class="carousel slide" data-ride="carousel">
@@ -31,8 +30,7 @@
                   <%= cl_image_tag photo.key, class: "d-block w-100", crop: :fill %>
                 </div>
                 <% end %>
-              </div>
-
+            </div>
               <button class="carousel-control-prev" type="button" data-target="#<%= playwall_post.id %>photos" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -42,25 +40,23 @@
                 <span class="sr-only">Next</span>
               </button>
             </div>
-            <% else %>
-              <div class="carousel slide" data-ride="carousel">
+          <% else %>
+            <div class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <%= cl_image_tag playwall_post.photos.first.key, class: "d-block w-100", crop: :fill %>
                 </div>
               </div>
             </div>
-      <% end %>
+          <% end %>
     <% end %>
-
-
-    <div class="card-trip-infos pt-2" data-controller="like-button">
-      <h2>
+  <div class="card-trip-infos pt-2" data-controller="like-button">
+    <h2>
       <% if playwall_post.favoritors.include?(current_user) %>
 
       <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
-                              class: "fas fa-heart",
-                              style: "color:#bf0206;",
+                              class: "fas fa-heart fa-lg",
+                              style: "color:#bf0206; text-decoration:none",
                               remote: true,
                               method: :post,
                               data: {
@@ -69,8 +65,8 @@
                             } %>
       <% else %>
             <%= link_to "", toggle_favorite_playwall_post_path(playwall_post),
-                              class: "far fa-heart",
-                              style: "color:black;",
+                              class: "far fa-heart fa-lg",
+                              style: "color:black; text-decoration:none",
                               remote: true,
                               method: :post,
                               data: {
@@ -78,18 +74,32 @@
                               action: 'click->like-button#unlike'
                             } %>
       <% end %>
-      <span data-like-button-target="counter" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
+      <span data-like-button-target="counter" style="font-size:1.33em;" value="<%= playwall_post.favoritors.count %>"><%= playwall_post.favoritors.count %></span></h2>
       <div class="dropdown">
-        <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown"></button>
+
+        <button class="fas fa-ellipsis-v" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="color:black;"></button>
             <div class="dropdown-menu dropdown-menu-right ">
-              <%= link_to "Submit Violation", new_playwall_post_play_wall_report_path(playwall_post)%>
+      <% if current_user == playwall_post.user %>
+      <% elsif current_user.friends.include?(playwall_post.user) %>
+              <span class="dropdown-item text-primary"><i class="fas fa-user-friends"></i> Friend</span>
+      <% elsif current_user.pending_friends.include?(playwall_post.user) || current_user.requested_friends.include?(playwall_post.user) %>
+              <span class="dropdown-item text-info"><i class="fas fa-user-clock"></i> Pending Friend Request</span>
+      <% else %>
+              <%= link_to add_friend_path(playwall_post.user), class: "text-success dropdown-item" do %>
+                <i class="fas fa-user-plus"></i><span> Add User</span>
+              <% end %>
+      <% end %>
+              <%= link_to new_playwall_post_play_wall_report_path(playwall_post), class: "text-danger dropdown-item" do %>
+                <i class="fas fa-exclamation-circle"></i><span> Submit Violation</span>
+              <% end %>
             </div>
+
       </div>
-    </div>
-    <div class="card-trip-infos pt-3">
-      <h6><%= playwall_post.caption %></h6>
-    </div>
-      <div class="card-trip-infos pt-3">
+  </div>
+  <div class="card-trip-infos pt-3">
+    <h6><b><%= playwall_post.user.username %></b> <%= playwall_post.caption %></h6>
+  </div>
+  <div class="card-trip-infos pt-3">
 
   <% if playwall_post.comments.present? %>
     <% rand_comment = playwall_post.comments.sample %>
@@ -104,13 +114,10 @@
       <%= link_to "View all #{playwall_post.comments.count} comments", playwall_post_comments_path(playwall_post)  %>
     <% end %>
   </div>
-    <div class="card-trip-infos pt-3">
-      <p class="text-muted"><i class="far fa-clock"></i>posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
-    </div>
+  <div class="card-trip-infos pt-3">
+    <p class="text-muted"><i class="far fa-clock"></i> posted <%= time_ago_in_words(playwall_post.created_at).gsub('about ','') %> ago</p>
   </div>
-
-<% end %>
-
 </div>
 
-<%= render 'shared/btm-navbar' %>
+
+<% end %>
