@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @status = StatusUpdate.all.by_latest
+    @status = StatusUpdate.where_latest.by_latest
     @friendstatus = @status.select { |update| current_user.friends.include?(update.user) }
   end
 
