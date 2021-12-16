@@ -19,6 +19,7 @@ class QueueWallsController < ApplicationController
         @queue_count[n] = 3
       end
     end
+
     @queues = QueueWall.all
     @ranges = GolfRange.all
     @weather = weather_status(@ranges)
