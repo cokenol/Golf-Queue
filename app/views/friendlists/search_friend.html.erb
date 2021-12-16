@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Search for golfers!</h1>
+  <h1>Search for Golfers!</h1>
     <%= simple_form_for :search, url: search_friends_path, method: :get , html: { class: 'form-inline'} do |f| %>
       <%= f.input :username, label: false, input_html: {value: "", style: 'margin-top: 1rem;'} %>
       <%= f.submit "Search", class: "btn", style: "width: 30%;" %>
@@ -8,7 +8,7 @@
 
 <% if @result == true %>
 
-<h5 class="mt-4">Found <%= @usernames.count %> golfer!</h5>
+<h5 class="mt-4">Found <%= @usernames.count %> golfers!</h5>
   <% @usernames.each do |user| %>
     <div class="card-product my-2">
         <% if user.image.present? %>
