@@ -46,6 +46,11 @@ class PlaywallPostsController < ApplicationController
     end
   end
 
+  def destroy
+    @playwall = PlaywallPost.find(params[:id])
+    redirect_to playwall_posts_path if @playwall.destroy
+  end
+
   def show
     @playwall = PlaywallPost.find(params[:id])
   end

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       post 'toggle_vote', to: "queue_walls#toggle_votes"
     end
   end
+  delete '/playwall_posts/:id', to: 'playwall_posts#destroy', as: 'delete_post'
   resources :playwall_posts, only: %i[index new create show] do
     resources :comments, only: %i[index new show create]
     resources :play_wall_reports, only: %i[new create]
