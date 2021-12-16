@@ -1,4 +1,4 @@
-    <%= link_to "Search for Golfers", search_friends_path, class: "btn mb-2"  %>
+    <%= link_to "Search for Golfers", search_friends_path, class: "btn my-2"  %>
   <% if current_user.friends.count == 0 %>
     <h6>You got no friends, try adding some!</h6>
   <% else %>
@@ -40,10 +40,10 @@
     <% end %>
   <% end %>
 
-  <h4>Blocked List</h4>
+  <h5>Blocked List</h5>
 
   <% if current_user.blocked_friends.count == 0 %>
-    <h6>Looks like you got no enemies here, keep up the good vibes!</h6>
+    <p>Looks like you got no enemies here, keep up the good vibes!</p>
   <% else %>
     <% current_user.blocked_friends.each do |friend| %>
       <div class="card-product">

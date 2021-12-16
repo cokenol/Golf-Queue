@@ -91,7 +91,7 @@
       <p class="text-muted"><i class="far fa-clock"></i>posted <%= time_ago_in_words(queue_wall.created_at).gsub('about ', '') %> ago</p>
     <% end %> --->
 
-    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level), class: "btn btn-primary mb-2" %>
+    <%= link_to "Update #{queue_wall.level}", new_golf_range_queue_wall_path(@golfrange, level: queue_wall.level), class: "btn mb-2", style: "width: 30%;" %>
   </div>
 
 </div>

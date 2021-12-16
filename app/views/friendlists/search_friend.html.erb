@@ -2,7 +2,7 @@
   <h1>Search for golfers!</h1>
     <%= simple_form_for :search, url: search_friends_path, method: :get , html: { class: 'form-inline'} do |f| %>
       <%= f.input :username, label: false, input_html: {value: "", style: 'margin-top: 1rem;'} %>
-      <%= f.submit "Search", class: "btn" %>
+      <%= f.submit "Search", class: "btn", style: "width: 30%;" %>
     <% end %>
 
 
@@ -48,5 +48,7 @@
   <% elsif @result == false %>
   <h6 class="mt-4">No Results for '<i><%= params["search"]["username"] %></i>'</h6>
 <% end %>
-  <%= link_to "Go Back", friends_path  %>
+  <%= link_to 'javascript:history.back()', class:"btn my-3" do %>
+  <i class="fas fa-arrow-left"></i> Back
+  <% end %>
 </div>
