@@ -2,7 +2,7 @@
 <% playwall_posts.each do |playwall_post| %>
     <div class="card-trip">
           <div class="card-trip-infos">
-            <h2 class="pt-2 d-flex align-items-center">
+            <h2 class="p-2 d-flex align-items-center">
           <% if playwall_post.user.photo.attached? %>
             <%= cl_image_tag playwall_post.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar" %>
           <% elsif playwall_post.user.image.present? %>
