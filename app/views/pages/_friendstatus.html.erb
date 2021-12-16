@@ -12,7 +12,12 @@
               <% end %>
             <div class="notification-content">
               <p><small>@<%=friend.user.username %></small></p>
+              <% if Time.now > friend.start_time && Time.now < friend.end_time %>
+              <p>I am at <strong><%= friend.golf_range.name %></strong> on <%= friend.start_time.strftime("%d %b %y") %> from <%= friend.start_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p") %> to <%= friend.end_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p")  %>!</p>
+            <% else %>
               <p>I am going to <strong><%= friend.golf_range.name %></strong> on <%= friend.start_time.strftime("%d %b %y") %> from <%= friend.start_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p") %> to <%= friend.end_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p")  %>!</p>
+
+            <% end %>
             </div>
           </div>
         <% end %>
