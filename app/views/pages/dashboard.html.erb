@@ -62,24 +62,7 @@
       </div>
       <% end %>
 
-      <h5 class="mt-2">Your Friends Updates</h5>
-
-
-        <% @friendstatus.each do |friend| %>
-          <div class="notification">
-            <% if friend.user.photo.attached? %>
-                <%= cl_image_tag friend.user.photo.key, width: 40, height: 40, crop: :thumb, gravity: :face, class: "avatar-large" %>
-              <% elsif friend.user.image.present? %>
-                <%= image_tag friend.user.image , class: "avatar-large" %>
-              <% else %>
-                <i class="far fa-user-circle avatar-large fa-2x text-black"></i>
-              <% end %>
-            <div class="notification-content">
-              <p><small>@<%=friend.user.username %></small></p>
-              <p>I am going to <strong><%= friend.golf_range.name %></strong> on <%= friend.start_time.strftime("%d %b %y") %> from <%= friend.start_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p") %> to <%= friend.end_time.in_time_zone("Asia/Singapore").strftime("%I:%M%p")  %>!</p>
-            </div>
-          </div>
-        <% end %>
+      <%= render "friendstatus" %>
 
 
     </div>

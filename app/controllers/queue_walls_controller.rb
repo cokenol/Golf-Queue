@@ -19,6 +19,10 @@ class QueueWallsController < ApplicationController
         @queue_count[n] = 3
       end
     end
+    if current_user.present?
+      @status = StatusUpdate.where_latest.by_latest
+      @friendstatus = @status.select { |update| current_user.friends.include?(update.user) }
+    end
     @queues = QueueWall.all
     @ranges = GolfRange.all
     @weather = weather_status(@ranges)
