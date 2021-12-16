@@ -41,7 +41,6 @@ export default class extends Controller {
      })
       .then(response => response.json())
       .then(data => {
-        debugger;
         if (data.status === 'success') {
           if (window.location.href )
           window.location = data.location
