@@ -4,14 +4,14 @@ class PlaywallPostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @pagy, @playwall = pagy(PlaywallPost.all.by_latest)
+    @pagy, @playwall = pagy(PlaywallPost.not_deleted.by_latest)
 
     respond_to do |format|
-        format.html
-        format.json {
-          render json: { entries: render_to_string(partial: "playwall_posts", locals: { playwall_posts: @playwall }, formats: [:html]),
-         pagination: view_context.pagy_nav(@pagy)}
-        }
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: "playwall_posts", locals: { playwall_posts: @playwall }, formats: [:html]),
+        pagination: view_context.pagy_nav(@pagy)}
+      }
     end
 
   end
@@ -48,7 +48,8 @@ class PlaywallPostsController < ApplicationController
 
   def destroy
     @playwall = PlaywallPost.find(params[:id])
-    redirect_to playwall_posts_path if @playwall.destroy
+    @playwall.display = false
+    redirect_to playwall_posts_path if @playwall.save
   end
 
   def show

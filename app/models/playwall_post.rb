@@ -10,4 +10,8 @@ class PlaywallPost < ApplicationRecord
   scope :by_latest, -> () do
     order(created_at: :desc)
   end
+
+  scope :not_deleted, -> () do
+    where(display: true)
+  end
 end
