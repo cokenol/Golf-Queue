@@ -8,6 +8,7 @@
     "@rails/webpacker": "5.4.3",
     "animate.css": "^4.1.1",
     "bootstrap": "4.6",
+    "glider-js": "^1.7.7",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "stimulus": "^3.0.1",
