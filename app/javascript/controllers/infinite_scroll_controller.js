@@ -58,9 +58,10 @@ export default class extends Controller {
       if (entry.isIntersecting) {
         console.log('hitting the intersection');
         this.loadMore();
-        setTimeout(() => {
+        document.addEventListener("scroll", () => {
+          console.log("scroll");
           this.carousel();
-        }, 1000);
+        })
       }
     })
   }
