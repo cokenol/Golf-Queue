@@ -6,7 +6,7 @@
 
 
 import { Controller } from "stimulus";
-
+import "glider-js/glider.min.js";
 import Rails from "@rails/ujs";
 
 export default class extends Controller {
@@ -17,18 +17,23 @@ export default class extends Controller {
       rootMargin: '200px',
     }
 
-    this.intersectionObserver = new IntersectionObserver(entries => this.processIntersectionEntries(entries), options)
+    this.intersectionObserver = new IntersectionObserver(entries => this.processIntersectionEntries(entries), options);
+    // this.mutationObserver = new MutationObserver(() => this.carousel());
     console.log(this.intersectionObserver);
+    this.carousel();
+    // document.addEventListener('scroll', () => this.carousel());
   }
 
   connect() {
     // Anytime the controller is connected to the DOM
     console.log("Infinite scrolling Controller Connected!");
     this.intersectionObserver.observe(this.paginationTarget)
+    // this.mutationObserver.observe(this.entriesTarget)
   }
 
   disconnect() {
     this.intersectionObserver.unobserve(this.paginationTarget)
+    // this.mutationObserver.unobserve(this.entriesTarget)
   }
 
   // scroll() {
@@ -52,9 +57,40 @@ export default class extends Controller {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         console.log('hitting the intersection');
-        this.loadMore()
+        this.loadMore();
+        this.carousel();
       }
     })
+  }
+
+
+
+  carousel() {
+    console.log('glider activated');
+    let sliders = document.querySelectorAll('.glider');
+    sliders.forEach( (s) => {
+      new Glider(s, {
+      // Mobile-first defaults
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      scrollLock: true,
+      draggable: true,
+      dots: s.parentNode.querySelector('.glider-dots')
+      });
+    });
+
+    // new Glider(document.querySelector('.glider'), {
+    //     // Mobile-first defaults
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     scrollLock: true,
+    //     draggable: true,
+    //     dots: '#resp-dots',
+    //     arrows: {
+    //       prev: '.glider-prev',
+    //       next: '.glider-next'
+    //     }
+    // });
   }
 
   loadMore() {
@@ -68,8 +104,9 @@ export default class extends Controller {
       dataType: 'json',
       success: (data) => {
         this.entriesTarget.insertAdjacentHTML('beforeend', data.entries );
-        console.log(this.paginationTarget);
-        console.log(data.pagination);
+        // console.log(data.entries);
+        // console.log(this.paginationTarget);
+        // console.log(data.pagination);
         this.paginationTarget.innerHTML = data.pagination;
       },
       error: (e) => { console.log(`something went wrong: ${e}`)}

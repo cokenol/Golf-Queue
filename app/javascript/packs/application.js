@@ -24,6 +24,7 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import "glider-js/glider.min.js";
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -33,3 +34,20 @@ document.addEventListener('turbolinks:load', () => {
 
 
 import "controllers"
+
+window.addEventListener('load', () => {
+  document.querySelectorAll('.glider').forEach((s) => {
+    new Glider(s, {
+      // Mobile-first defaults
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      scrollLock: true,
+      draggable: true,
+      dots: s.parentNode.querySelector('.glider-dots'),
+      arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'
+      },
+    });
+  })
+})
