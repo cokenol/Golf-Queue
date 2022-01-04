@@ -60,7 +60,7 @@ export default class extends Controller {
         this.loadMore();
         setTimeout(() => {
           this.carousel();
-        }, 200);
+        }, 1000);
       }
     })
   }
