@@ -58,7 +58,9 @@ export default class extends Controller {
       if (entry.isIntersecting) {
         console.log('hitting the intersection');
         this.loadMore();
-        this.carousel();
+        setTimeout(() => {
+          this.carousel();
+        }, 200);
       }
     })
   }
@@ -78,19 +80,6 @@ export default class extends Controller {
       dots: s.parentNode.querySelector('.glider-dots')
       });
     });
-
-    // new Glider(document.querySelector('.glider'), {
-    //     // Mobile-first defaults
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     scrollLock: true,
-    //     draggable: true,
-    //     dots: '#resp-dots',
-    //     arrows: {
-    //       prev: '.glider-prev',
-    //       next: '.glider-next'
-    //     }
-    // });
   }
 
   loadMore() {

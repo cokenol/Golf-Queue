@@ -44,10 +44,6 @@ window.addEventListener('load', () => {
       scrollLock: true,
       draggable: true,
       dots: s.parentNode.querySelector('.glider-dots'),
-      arrows: {
-        prev: '.glider-prev',
-        next: '.glider-next'
-      },
     });
   })
 })
