@@ -12,7 +12,7 @@ export default class extends Controller {
   initialize() {
     // Once, when the controller is first instantiated
     // console.log("Generated Controller Initialized!");
-    var expires = (new Date(Date.now() + 900000))
+    var expires = (new Date(Date.now() + 600000))
     if (document.cookie === "") {
       navigator.geolocation.getCurrentPosition((position) => {
         var cookie_val = position.coords.latitude + "|" + position.coords.longitude;
@@ -23,7 +23,7 @@ export default class extends Controller {
 
   connect() {
     // Anytime the controller is connected to the DOM
-    var expires = (new Date(Date.now() + 900000))
+    var expires = (new Date(Date.now() + 600000))
     if (document.cookie === "") {
       navigator.geolocation.getCurrentPosition((position) => {
         var cookie_val = position.coords.latitude + "|" + position.coords.longitude;
